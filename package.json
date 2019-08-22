@@ -1,17 +1,37 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
-  "license": "",
-  "engines": {
-    "node": ">=6.13.0"
-  },
+  "name": "module-photo-gallery",
+  "version": "1.0.0",
+  "description": "Displays a collection of images from which a user may select",
+  "main": "server",
+  "author": "Julia Kim",
+  "license": "ISC",
   "scripts": {
+    "build": "webpack -d --watch",
+    "start": "nodemon index.js"
   },
   "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.10",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
-  }
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shazamazon/module-photo-gallery.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shazamazon/module-photo-gallery/issues"
+  },
+  "homepage": "https://github.com/shazamazon/module-photo-gallery#readme"
 }
