@@ -8,7 +8,7 @@ const port = 1004;
 app.use(express.static('dist'));
 
 app.get('/items', (req, res) => {
-  db.getOneItem('media', {'productName': 'Harry Potter\'s Wand'}, (err, docs) => {
+  db.findItem('media', {'productName': 'Harry Potter\'s Wand'}, (err, docs) => {
     if (err) {
       return err;
     }
