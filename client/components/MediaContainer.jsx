@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import MainImage from './MainImage.jsx';
+import AdditionalMedia from './AdditionalMedia.jsx';
+import Caption from './Caption.jsx';
+
 class MediaContainer extends Component {
   constructor() {
     super();
     this.state = {
-      images: []
+      images: [],
+      main: '',
+      caption: 'Roll over image to zoom in'
     };
   }
 
@@ -24,6 +30,9 @@ class MediaContainer extends Component {
     return (
       <>
         {this.state.images.map(image => <img src={image}/>)}
+        <AdditionalMedia />
+        <MainImage />
+        <Caption />
       </>
     );
   }
