@@ -4,7 +4,9 @@ import Image from './Image.jsx';
 
 const AdditionalMedia = (props) => {
   return (
-    props.images.map(image => <Image image={image} />)
+    <div id='gall_additional'>
+      {props.images.map(image => <Image image={image} />)}
+    </div>
   );
 };
 
