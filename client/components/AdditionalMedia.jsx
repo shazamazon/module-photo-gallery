@@ -1,7 +1,11 @@
 import React from 'react';
 
+import Image from './Image.jsx';
+
 const AdditionalMedia = (props) => {
-  return (<div>Hello from AdditionalMedia</div>);
+  return (
+    props.images.map(image => <Image image={image} />)
+  );
 };
 
 export default AdditionalMedia;

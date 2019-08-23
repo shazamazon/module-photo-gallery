@@ -1,8 +1,7 @@
 import React from 'react';
-import Image from './Image.jsx';
 
 const MainImage = (props) => {
-  return (<div><Image /></div>);
+  return (<img src={props.main} />);
 };
 
 export default MainImage;

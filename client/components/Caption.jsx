@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Caption = (props) => {
-  return (<div>Hello from Caption</div>);
+  return (<div>{props.caption}</div>);
 };
 
 export default Caption;

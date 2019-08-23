@@ -1,7 +1,12 @@
 import React from 'react';
 
 const Image = (props) => {
-  return (<div>Hello from Image</div>);
+  return (
+    <>
+      <img src={props.image} />
+      <br />
+    </>
+  );
 };
 
 export default Image;
