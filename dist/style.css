@@ -1,10 +1,12 @@
 #gall_root {
   display: -webkit-box;
-  display: -moz-box;
+  display:    -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
   max-width: 50%;
+  padding-left: 2px;
+  font-family: Arial, sans-serif;
 }
 
 #gall_wrapper {
@@ -19,11 +21,9 @@
 
 #gall_main img {
   max-width: 100%;
-  height: auto;
 }
 
 #gall_caption {
-  font-family: Arial, sans-serif;
   font-size: 13px;
   text-align: center;
 }
@@ -45,6 +45,7 @@
   position: relative;
   width: 40px;
   height: 40px;
+  border: 1px solid #a2a6ac;
   border-radius: 2px;
   margin-bottom: 10px;
   overflow: hidden;
@@ -56,6 +57,7 @@
   top: 50%;
   height: 100%;
   width: auto;
+  padding: 11px 17px 12px 17px;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
