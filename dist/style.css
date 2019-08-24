@@ -1,0 +1,62 @@
+#gall_root {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  max-width: 50%;
+}
+
+#gall_wrapper {
+  flex-direction: column;
+}
+
+#gall_main {
+  width: 100%;
+  max-width: 576px;
+  max-height: 576px;
+}
+
+#gall_main img {
+  max-width: 100%;
+  height: auto;
+}
+
+#gall_caption {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  text-align: center;
+}
+
+#gall_additional {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Container holding thumbnail image */
+.gall_thumbnail {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.gall_thumbnail img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}

@@ -33,8 +33,10 @@ class MediaContainer extends Component {
     return (
       <>
         <AdditionalMedia images={this.state.images} />
-        <MainImage main={this.state.main} />
-        <Caption caption={this.state.caption} />
+        <div id='gall_wrapper'>
+          <MainImage main={this.state.main} />
+          <Caption caption={this.state.caption} />
+        </div>
       </>
     );
   }
