@@ -13,6 +13,8 @@ class MediaContainer extends Component {
       main: '',
       caption: 'Roll over image to zoom in'
     };
+
+    this.selectView = this.selectView.bind(this);
   }
 
   getItem() {
@@ -29,10 +31,14 @@ class MediaContainer extends Component {
     this.getItem();
   }
 
+  selectView(e) {
+    this.setState({main: e});
+  }
+
   render() {
     return (
       <>
-        <AdditionalMedia images={this.state.images} />
+        <AdditionalMedia images={this.state.images} selectView={this.selectView} />
         <div id='gall_wrapper'>
           <MainImage main={this.state.main} />
           <Caption caption={this.state.caption} />
