@@ -56,28 +56,28 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-height: 720px;
   padding-left: .95%;
+  /* position: relative; */
+  width: 47vw;
+  height: 47vw;
+  /* overflow: hidden; */
 }
 
 #gall_main {
-  position: relative;
-  width: 47vw;
-  height: 47vw;
-  max-height: 700px;
-  overflow: hidden;
-}
-
-#gall_main img {
   /* Positions image in center of div holding image */
-  position: absolute;
+  position: relative;
   left: 50%;
   top: 50%;
   object-fit: contain;
-  width: 99%;
-  height: 100%;
+  max-height: 100%;
+  /* width: 99%;
+  height: 100%; */
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+  filter: drop-shadow(0px 0px 1px rgba(0,0,0,.3))
+  drop-shadow(0px 0px 10px rgba(0,0,0,.3));
 }
 
 #gall_caption {
