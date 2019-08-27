@@ -12,10 +12,15 @@ class MediaContainer extends Component {
       id: 1,
       images: [],
       main: '',
-      caption: 'Roll over image to zoom in'
+      caption: 'Roll over image to zoom in',
+      x: 0,
+      y: 0
     };
 
     this.selectView = this.selectView.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   getItem() {
@@ -36,12 +41,33 @@ class MediaContainer extends Component {
     this.setState({main: e});
   }
 
+  handleMouseEnter(e) {
+    this.setState({
+      x: e.clientX,
+      y: e.clientY
+    }, () => console.log('X: ', this.state.x, ', Y: ', this.state.y));
+  }
+
+  handleMouseMove(e) {
+    this.setState({
+      x: e.clientX,
+      y: e.clientY
+    }, () => console.log('X: ', this.state.x, ', Y: ', this.state.y));
+  }
+
+  handleMouseLeave(e) {
+    this.setState({
+      x: e.clientX,
+      y: e.clientY
+    }, () => console.log('X: ', this.state.x, ', Y: ', this.state.y));
+  }
+
   render() {
     return (
       <>
         <AdditionalMedia images={this.state.images} selectView={this.selectView} />
         <div id='gall_wrapper'>
-          <MainImage main={this.state.main} />
+          <MainImage main={this.state.main} onMouseEnter={this.handleMouseEnter} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} />
           <Caption caption={this.state.caption} />
         </div>
       </>
