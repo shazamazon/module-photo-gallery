@@ -27,7 +27,7 @@ const seedDatabase = () => {
 };
 
 const findItem = (id) => {
-  return media.find({ ProductId: id }).exec();
+  return media.find({ ProductId: id });
 };
 
 module.exports = { db, findItem };
