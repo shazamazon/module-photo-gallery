@@ -9,7 +9,7 @@ class MediaContainer extends Component {
   constructor() {
     super();
     this.state = {
-      id: 1,
+      id: 46,
       images: [],
       main: '',
       caption: 'Roll over image to zoom in',
