@@ -26,10 +26,8 @@ const seedDatabase = () => {
   });
 };
 
-const findItem = (name, query, callback) => {
-  db.db.collection(name, (err, collection) => {
-    collection.find(query).toArray(callback);
-  });
+const findItem = (id) => {
+  return media.find({ ProductId: id }).exec();
 };
 
-module.exports = { db, seedDatabase, findItem };
+module.exports = { db, findItem };
