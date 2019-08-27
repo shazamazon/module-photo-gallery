@@ -9,6 +9,7 @@ class MediaContainer extends Component {
   constructor() {
     super();
     this.state = {
+      id: 1,
       images: [],
       main: '',
       caption: 'Roll over image to zoom in'
@@ -18,11 +19,11 @@ class MediaContainer extends Component {
   }
 
   getItem() {
-    axios.get('/items')
+    axios.get(`/item/${this.state.id}`)
       .then(({ data }) => {
         this.setState({
-          images: data[0].images,
-          main: data[0].images[0]
+          images: data.Photo,
+          main: data.Photo[0]
         });
       });
   }
