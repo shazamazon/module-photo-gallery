@@ -10,12 +10,10 @@ app.use(express.static('dist'));
 app.get('/item/:id', (req, res) => {
   db.findItem(req.params.id)
     .then(item => {
-      res.status(200);
-      res.send(item[0]);
+      res.status(200).send(item[0]);
     })
     .catch(err => {
-      res.status(500);
-      res.send('Could not retrieve images from database');
+      res.status(500).send('Could not retrieve images from database');
     });
 });
 
