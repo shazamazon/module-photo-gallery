@@ -21,6 +21,7 @@ class MediaContainer extends Component {
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.getImageDimensions = this.getImageDimensions.bind(this);
   }
 
   getItem() {
@@ -62,12 +63,16 @@ class MediaContainer extends Component {
     }, () => console.log('X: ', this.state.x, ', Y: ', this.state.y));
   }
 
+  getImageDimensions(e) {
+    console.log(e);
+  }
+
   render() {
     return (
       <>
         <AdditionalMedia images={this.state.images} selectView={this.selectView} />
         <div id='gall_wrapper'>
-          <MainImage main={this.state.main} onMouseEnter={this.handleMouseEnter} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} />
+          <MainImage main={this.state.main} onMouseEnter={this.handleMouseEnter} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} getImageDimensions={this.getImageDimensions} />
           <Caption caption={this.state.caption} />
         </div>
       </>
