@@ -716,7 +716,7 @@ const data = [
     "ItemName": "Sound Activated Party Lights with Remote Control Disco lights Dj Lighting SOLMORE Disco Ball 9 Colors Strobe Lamp 7 Modes Stage Par Light Club Party Gift Kids Birthday Wedding Home Karaoke Dance",
     "Price": 19.39,
     "Rating": 4.8,
-    "Photo": [ 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view0.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view1.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view2.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view3.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view4.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view5.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view6.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view7.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view8.jpg' ],
+    "Photo": [ 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view0.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view1.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view2.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view3.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view4.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view5.jpg', 'https://shazamazon.s3.us-east-2.amazonaws.com/lamps/DiscoLamp/view6.jpg' ],
     "Video": null
   },
   {
