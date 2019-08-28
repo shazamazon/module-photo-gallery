@@ -14,6 +14,7 @@ class MediaContainer extends Component {
       images: [],
       main: '',
       caption: 'Roll over image to zoom in',
+      isExpandedView: false,
       x: 0,
       y: 0
     };
@@ -22,6 +23,7 @@ class MediaContainer extends Component {
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleMainImageClick = this.handleMainImageClick.bind(this);
     this.getImageDimensions = this.getImageDimensions.bind(this);
   }
 
@@ -66,6 +68,12 @@ class MediaContainer extends Component {
     }, () => console.log('X: ', this.state.x, ', Y: ', this.state.y));
   }
 
+  handleMainImageClick(e) {
+    this.setState({
+      isExpandedView: true
+    });
+  }
+
   getImageDimensions(e) {
     console.log(e);
   }
@@ -75,7 +83,7 @@ class MediaContainer extends Component {
       <>
         <AdditionalMedia images={this.state.images} selectView={this.selectView} />
         <div id='gall_wrapper'>
-          <MainImage main={this.state.main} onMouseEnter={this.handleMouseEnter} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} getImageDimensions={this.getImageDimensions} />
+          <MainImage main={this.state.main} onMouseEnter={this.handleMouseEnter} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} onMainImageClick={this.handleMainImageClick} getImageDimensions={this.getImageDimensions} />
           <Caption caption={this.state.caption} />
         </div>
       </>

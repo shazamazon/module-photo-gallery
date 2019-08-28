@@ -2,7 +2,7 @@ import React from 'react';
 
 const MainImage = (props) => {
   return (
-    <div id='gall_main' onMouseEnter={props.onMouseEnter} onMouseMove={props.onMouseMove} onMouseLeave={props.onMouseLeave}>
+    <div id='gall_main' onMouseEnter={props.onMouseEnter} onMouseMove={props.onMouseMove} onMouseLeave={props.onMouseLeave} onClick={props.onMainImageClick}>
       <img src={props.main} onLoad={(e) => props.getImageDimensions(e.currentTarget.src)} />
     </div>
   );
