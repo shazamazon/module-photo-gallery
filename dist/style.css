@@ -67,6 +67,10 @@
   overflow: hidden;
 }
 
+#gall_main:hover {
+  cursor: pointer;
+}
+
 #gall_main img {
   /* Positions image in center of div holding image */
   position: absolute;

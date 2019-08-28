@@ -44,6 +44,7 @@ class MediaContainer extends Component {
 
   handleMouseEnter(e) {
     this.setState({
+      caption: 'Click image to open expanded view',
       x: e.clientX,
       y: e.clientY
     }, () => console.log('X: ', this.state.x, ', Y: ', this.state.y));
@@ -58,6 +59,7 @@ class MediaContainer extends Component {
 
   handleMouseLeave(e) {
     this.setState({
+      caption: 'Roll over image to zoom in',
       x: e.clientX,
       y: e.clientY
     }, () => console.log('X: ', this.state.x, ', Y: ', this.state.y));
