@@ -4,6 +4,7 @@ import axios from 'axios';
 import MainImage from './MainImage.jsx';
 import AdditionalMedia from './AdditionalMedia.jsx';
 import Caption from './Caption.jsx';
+import ExpandedView from './ExpandedView.jsx';
 
 class MediaContainer extends Component {
   constructor() {
@@ -22,7 +23,8 @@ class MediaContainer extends Component {
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.handleMainImageClick = this.handleMainImageClick.bind(this);
+    this.showExpandedView = this.showExpandedView.bind(this);
+    this.closeExpandedView = this.closeExpandedView.bind(this);
     this.getImageDimensions = this.getImageDimensions.bind(this);
   }
 
@@ -67,11 +69,24 @@ class MediaContainer extends Component {
     }, () => console.log('X: ', this.state.x, ', Y: ', this.state.y));
   }
 
-  handleMainImageClick(e) {
+  showExpandedView(e) {
     this.setState({
       isExpandedView: true
+    }, () => {
+      document.addEventListener('click', this.closeExpandedView);
     });
   }
+
+  closeExpandedView(e) {
+    if (!this.expandedView.modal.contains(e.target)) {
+      this.setState({
+        isExpandedView: false
+      }, () => {
+        document.removeEventListener('click', this.closeExpandedView);
+      });
+    }
+  }
+
 
   getImageDimensions(e) {
     console.log(e);
@@ -82,9 +97,10 @@ class MediaContainer extends Component {
       <>
         <AdditionalMedia images={this.state.images} selectView={this.selectView} />
         <div id='gall_wrapper'>
-          <MainImage main={this.state.main} isExpandedView={this.state.isExpandedView} onMouseEnter={this.handleMouseEnter} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} onMainImageClick={this.handleMainImageClick} getImageDimensions={this.getImageDimensions} />
+          <MainImage main={this.state.main} isExpandedView={this.state.isExpandedView} onMouseEnter={this.handleMouseEnter} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} showExpandedView={this.showExpandedView} getImageDimensions={this.getImageDimensions} />
           <Caption caption={this.state.caption} />
         </div>
+        {this.state.isExpandedView && <ExpandedView ref={node => this.expandedView = node} />}
       </>
     );
   }

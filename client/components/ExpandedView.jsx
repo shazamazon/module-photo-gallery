@@ -8,7 +8,7 @@ class ExpandedView extends Component {
 
   render() {
     return (
-      <div id='gall_expanded'>Hello from ExpandedView~</div>
+      <div id='gall_expanded' ref={node => this.modal = node}>Hello from ExpandedView~</div>
     );
   }
 }
