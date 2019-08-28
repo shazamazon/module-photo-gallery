@@ -4,7 +4,6 @@ import axios from 'axios';
 import MainImage from './MainImage.jsx';
 import AdditionalMedia from './AdditionalMedia.jsx';
 import Caption from './Caption.jsx';
-import ExpandedView from './ExpandedView.jsx';
 
 class MediaContainer extends Component {
   constructor() {
@@ -83,7 +82,7 @@ class MediaContainer extends Component {
       <>
         <AdditionalMedia images={this.state.images} selectView={this.selectView} />
         <div id='gall_wrapper'>
-          <MainImage main={this.state.main} onMouseEnter={this.handleMouseEnter} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} onMainImageClick={this.handleMainImageClick} getImageDimensions={this.getImageDimensions} />
+          <MainImage main={this.state.main} isExpandedView={this.state.isExpandedView} onMouseEnter={this.handleMouseEnter} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} onMainImageClick={this.handleMainImageClick} getImageDimensions={this.getImageDimensions} />
           <Caption caption={this.state.caption} />
         </div>
       </>
