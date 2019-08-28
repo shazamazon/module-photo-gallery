@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 const data = require('./data.js');
+const { password } = require('./config.js');
 
-mongoose.connect('mongodb://localhost/shazamazon', {useNewUrlParser: true});
+const URI = `mongodb+srv://kimjulia313:${password}@fec-photo-gallery-qoswz.mongodb.net/shazamazon?retryWrites=true&w=majority`;
+
+mongoose.connect(URI, {useNewUrlParser: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
