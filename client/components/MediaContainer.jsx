@@ -4,6 +4,7 @@ import axios from 'axios';
 import MainImage from './MainImage.jsx';
 import AdditionalMedia from './AdditionalMedia.jsx';
 import Caption from './Caption.jsx';
+import ExpandedView from './ExpandedView.jsx';
 
 class MediaContainer extends Component {
   constructor() {
