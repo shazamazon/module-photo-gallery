@@ -37,7 +37,7 @@ class MediaContainer extends Component {
           images: data.Photo,
           main: data.Photo[0],
           video: data.Video
-        }, () => console.log(data));
+        });
       });
   }
 
@@ -97,7 +97,6 @@ class MediaContainer extends Component {
     }
   }
 
-
   getImageDimensions(e) {
     console.log(e);
   }
@@ -105,9 +104,22 @@ class MediaContainer extends Component {
   render() {
     return (
       <>
-        <AdditionalMedia images={this.state.images} video={this.state.video} selectView={this.selectView} selectVideo={this.selectVideo} />
+        <AdditionalMedia
+          images={this.state.images}
+          video={this.state.video}
+          selectView={this.selectView}
+          selectVideo={this.selectVideo}
+        />
         <div id='gall_wrapper'>
-          <MainImage main={this.state.main} isExpandedView={this.state.isExpandedView} onMouseEnter={this.handleMouseEnter} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} showExpandedView={this.showExpandedView} getImageDimensions={this.getImageDimensions} />
+          <MainImage
+            main={this.state.main}
+            isExpandedView={this.state.isExpandedView}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseMove={this.handleMouseMove}
+            onMouseLeave={this.handleMouseLeave}
+            showExpandedView={this.showExpandedView}
+            getImageDimensions={this.getImageDimensions}
+          />
           {!this.state.main.includes('cloudfront') && <Caption caption={this.state.caption} />}
         </div>
         {this.state.isExpandedView && <ExpandedView ref={node => this.expandedView = node} />}
