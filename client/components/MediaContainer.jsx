@@ -21,6 +21,7 @@ class MediaContainer extends Component {
     };
 
     this.selectView = this.selectView.bind(this);
+    this.selectVideo = this.selectVideo.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
@@ -36,7 +37,7 @@ class MediaContainer extends Component {
           images: data.Photo,
           main: data.Photo[0],
           video: data.Video
-        });
+        }, () => console.log(data));
       });
   }
 
@@ -46,6 +47,13 @@ class MediaContainer extends Component {
 
   selectView(e) {
     this.setState({main: e});
+  }
+
+  selectVideo(e) {
+    this.setState({
+      main: e,
+      video: e
+    });
   }
 
   handleMouseEnter(e) {
@@ -97,10 +105,10 @@ class MediaContainer extends Component {
   render() {
     return (
       <>
-        <AdditionalMedia images={this.state.images} selectView={this.selectView} />
+        <AdditionalMedia images={this.state.images} video={this.state.video} selectView={this.selectView} selectVideo={this.selectVideo} />
         <div id='gall_wrapper'>
           <MainImage main={this.state.main} isExpandedView={this.state.isExpandedView} onMouseEnter={this.handleMouseEnter} onMouseMove={this.handleMouseMove} onMouseLeave={this.handleMouseLeave} showExpandedView={this.showExpandedView} getImageDimensions={this.getImageDimensions} />
-          <Caption caption={this.state.caption} />
+          {!this.state.main.includes('cloudfront') && <Caption caption={this.state.caption} />}
         </div>
         {this.state.isExpandedView && <ExpandedView ref={node => this.expandedView = node} />}
       </>
