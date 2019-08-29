@@ -8,7 +8,11 @@ class ExpandedView extends Component {
 
   render() {
     return (
-      <div id='gall_expanded' ref={node => this.modal = node}>Hello from ExpandedView~</div>
+      <div id='gall_expanded' ref={node => this.modal = node}>
+        <span id='gall_close'>
+          <img src='https://shazamazon.s3.us-east-2.amazonaws.com/icon/close.png' />
+        </span>
+      </div>
     );
   }
 }

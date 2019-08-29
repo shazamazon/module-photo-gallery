@@ -13,6 +13,7 @@ class MediaContainer extends Component {
       id: 46,
       images: [],
       main: '',
+      video: null,
       caption: 'Roll over image to zoom in',
       isExpandedView: false,
       x: 0,
@@ -33,7 +34,8 @@ class MediaContainer extends Component {
       .then(({ data }) => {
         this.setState({
           images: data.Photo,
-          main: data.Photo[0]
+          main: data.Photo[0],
+          video: data.Video
         });
       });
   }
