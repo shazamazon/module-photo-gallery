@@ -11,10 +11,12 @@ class MediaContainer extends Component {
     super();
     this.state = {
       id: 46,
+      name: '',
       images: [],
       main: '',
       video: null,
       caption: 'Roll over image to zoom in',
+      hoveredThumbnail: '',
       isExpandedView: false,
       x: 0,
       y: 0
@@ -34,6 +36,7 @@ class MediaContainer extends Component {
     axios.get(`/item/${this.state.id}`)
       .then(({ data }) => {
         this.setState({
+          name: data.ItemName,
           images: data.Photo,
           main: data.Photo[0],
           video: data.Video
@@ -46,13 +49,17 @@ class MediaContainer extends Component {
   }
 
   selectView(e) {
-    this.setState({main: e});
+    this.setState({
+      main: e,
+      hoveredThumbnail: e
+    });
   }
 
   selectVideo(e) {
     this.setState({
       main: e,
-      video: e
+      video: e,
+      hoveredThumbnail: e
     });
   }
 
@@ -80,18 +87,14 @@ class MediaContainer extends Component {
   }
 
   showExpandedView(e) {
-    this.setState({
-      isExpandedView: true
-    }, () => {
+    this.setState({isExpandedView: true}, () => {
       document.addEventListener('click', this.closeExpandedView);
     });
   }
 
   closeExpandedView(e) {
     if (!this.expandedView.modal.contains(e.target)) {
-      this.setState({
-        isExpandedView: false
-      }, () => {
+      this.setState({isExpandedView: false}, () => {
         document.removeEventListener('click', this.closeExpandedView);
       });
     }
@@ -107,11 +110,13 @@ class MediaContainer extends Component {
         <AdditionalMedia
           images={this.state.images}
           video={this.state.video}
+          hoveredThumbnail={this.state.hoveredThumbnail}
           selectView={this.selectView}
           selectVideo={this.selectVideo}
         />
         <div id='gall_wrapper'>
           <MainImage
+            name={this.state.name}
             main={this.state.main}
             isExpandedView={this.state.isExpandedView}
             onMouseEnter={this.handleMouseEnter}
@@ -122,7 +127,13 @@ class MediaContainer extends Component {
           />
           {!this.state.main.includes('cloudfront') && <Caption caption={this.state.caption} />}
         </div>
-        {this.state.isExpandedView && <ExpandedView ref={node => this.expandedView = node} />}
+        {this.state.isExpandedView && <ExpandedView
+          name={this.state.name}
+          expandedMain={this.state.main}
+          images={this.state.images}
+          video={this.state.video}
+          ref={node => this.expandedView = node}
+        />}
       </>
     );
   }

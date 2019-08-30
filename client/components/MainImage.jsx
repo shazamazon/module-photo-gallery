@@ -18,6 +18,7 @@ const MainImage = (props) => {
         ) : (
           <img
             src={props.main}
+            alt={props.name}
             onClick={props.showExpandedView}
             onLoad={(e) => props.getImageDimensions(e.currentTarget.src)}
           />

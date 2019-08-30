@@ -5,7 +5,7 @@ const Video = (props) => {
     <>
       <div
         className='gall_thumbnail'
-        id='gall_vidthumb'
+        id={props.hoveredThumbnail === props.video ? 'gall_hoverVideo' : 'gall_vidthumb'}
         onMouseEnter={() => props.selectVideo(props.video)}
       >
         <video src={props.video}></video>
