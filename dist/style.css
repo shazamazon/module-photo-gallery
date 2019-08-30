@@ -30,13 +30,14 @@
 .gall_thumbnail:hover {
   border-color: #e77600;
   box-shadow: 0 0 3px 3px rgba(228, 121, 17, .5);
+  cursor: pointer;
 }
 
 .gall_thumbnail img {
   /* Positions image in center of div holding image */
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   object-fit: contain;
   width: 100%;
   height: 100%;
@@ -51,6 +52,32 @@
   max-height: 10px;
 }
 
+.gall_thumbnail video {
+  position: absolute;
+  top: 23%;
+  object-fit: contain;
+  width: 100%;
+}
+
+#gall_vidthumb {
+  background-color: #555;
+}
+
+#gall_vidthumb img {
+  top: 0%;
+  left: 20%;
+  width: 60%;
+  transform: none;
+  z-index: 1;
+}
+
+#gall_vidcap {
+  color: #555;
+  font-size: 9px;
+  font-weight: 700;
+  text-align: center;
+}
+
 /* Main image */
 #gall_wrapper {
   display: flex;
@@ -61,17 +88,21 @@
 
 #gall_main {
   position: relative;
-  width: 47vw;
-  height: 47vw;
+  width: 46vw;
+  height: 46vw;
   max-height: 700px;
   overflow: hidden;
+}
+
+#gall_main:hover {
+  cursor: pointer;
 }
 
 #gall_main img {
   /* Positions image in center of div holding image */
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   object-fit: contain;
   width: 99%;
   height: 100%;
@@ -82,4 +113,59 @@
 
 #gall_caption {
   text-align: center;
+}
+
+#gall_video {
+  position: relative;
+  width: 46vw;
+  height: 46vw;
+  max-height: 700px;
+  overflow: hidden;
+}
+
+#gall_video video {
+  width: 100%;
+  padding-left: 19px;
+}
+
+#gall_video:before {
+  content: '';
+  position: absolute;
+  background: no-repeat 50% 24%/16% url('https://shazamazon.s3.us-east-2.amazonaws.com/icons/play_icon.jpg');
+  border-radius: 5px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* Modal */
+#gall_expanded {
+  display: block;
+  position: absolute;
+  top: 75px;
+  left: 37.5px;
+  width: 1205px;
+  height: 548px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, .75);
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .25), 0 0 0 100vmax rgba(0,0,0,.4);
+}
+
+#gall_close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  top: 50%;
+  width: 27px;
+  height: 27px;
+  margin: 6px 6px 0 0;
+  cursor: pointer;
+}
+
+#gall_close img {
+  width: 9px;
+  height: 9px;
 }
