@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
 import ExpandedImagesView from './ExpandedImagesView.jsx';
+import ExpandedVideoView from './ExpandedVideoView.jsx';
 
 class ExpandedView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expandedMain: this.props.main,
+      expandedMain: this.props.expandedMain,
       selectedThumbnail: '',
       hoveredThumbnail: ''
     };
@@ -14,6 +15,8 @@ class ExpandedView extends Component {
     this.selectImage = this.selectImage.bind(this);
     this.handleHoverOverThumbnail = this.handleHoverOverThumbnail.bind(this);
     this.handleHoverOffThumbnail = this.handleHoverOffThumbnail.bind(this);
+    this.viewImages = this.viewImages.bind(this);
+    this.viewVideo = this.viewVideo.bind(this);
   }
 
   selectImage(e) {
@@ -31,7 +34,18 @@ class ExpandedView extends Component {
     this.setState({hoveredThumbnail: ''});
   }
 
+  viewImages(e) {
+    e.preventDefault();
+    this.setState({expandedMain: this.props.images[0]});
+  }
+
+  viewVideo(e) {
+    e.preventDefault();
+    this.setState({expandedMain: this.props.video});
+  }
+
   render() {
+    console.log('this.state.expandedMain', this.state.expandedMain)
     return (
       <div id='gall_disable'>
         <div id='gall_expanded' ref={node => this.modal = node}>
@@ -40,21 +54,33 @@ class ExpandedView extends Component {
           </span>
           {this.props.video && (
             <ul id='gall_tabs'>
-              <li>RELATED VIDEOS</li>
-              <li>IMAGES</li>
+              <li
+                id={this.props.expandedMain.includes('cloudfront') || this.state.expandedMain.includes('cloudfront') ? 'gall_selectedTab' : null}
+                onClick={this.viewVideo}>
+                RELATED VIDEOS
+              </li>
+              <li
+                id={!this.props.expandedMain.includes('cloudfront') && !this.state.expandedMain.includes('cloudfront') ? 'gall_selectedTab' : null}
+                onClick={this.viewImages}>
+                IMAGES
+              </li>
             </ul>
           )}
-          <ExpandedImagesView
-            expandedMain={this.state.expandedMain ? this.state.expandedMain : this.props.expandedMain}
-            name={this.props.name}
-            images={this.props.images}
-            video={this.props.video}
-            selectedThumbnail={this.state.selectedThumbnail ? this.state.selectedThumbnail : this.props.expandedMain}
-            hoveredThumbnail={this.state.hoveredThumbnail}
-            selectImage={this.selectImage}
-            onHoverOverThumbnail={this.handleHoverOverThumbnail}
-            onHoverOffThumbnail={this.handleHoverOffThumbnail}
-          />
+          {this.props.expandedMain.includes('cloudfront') || this.state.expandedMain.includes('cloudfront') ? (
+            <ExpandedVideoView />
+          ) : (
+            <ExpandedImagesView
+              expandedMain={this.state.expandedMain ? this.state.expandedMain : this.props.expandedMain}
+              name={this.props.name}
+              images={this.props.images}
+              video={this.props.video}
+              selectedThumbnail={this.state.selectedThumbnail ? this.state.selectedThumbnail : this.props.expandedMain}
+              hoveredThumbnail={this.state.hoveredThumbnail}
+              selectImage={this.selectImage}
+              onHoverOverThumbnail={this.handleHoverOverThumbnail}
+              onHoverOffThumbnail={this.handleHoverOffThumbnail}
+            />
+          )}
         </div>
       </div>
     );
