@@ -17,8 +17,8 @@ const ExpandedImagesView = (props) => {
         selectedThumbnail={props.selectedThumbnail}
         hoveredThumbnail={props.hoveredThumbnail}
         selectImage={props.selectImage}
-        onHoverOverThumbnail={props.handleHoverOverThumbnail}
-        onHoverOffThumbnail={props.handleHoverOffThumbnail}
+        onHoverOverThumbnail={props.onHoverOverThumbnail}
+        onHoverOffThumbnail={props.onHoverOffThumbnail}
       />
     </div>
   );

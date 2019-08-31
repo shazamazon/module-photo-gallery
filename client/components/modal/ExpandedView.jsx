@@ -45,7 +45,6 @@ class ExpandedView extends Component {
   }
 
   render() {
-    console.log('this.state.expandedMain', this.state.expandedMain)
     return (
       <div id='gall_disable'>
         <div id='gall_expanded' ref={node => this.modal = node}>
@@ -55,22 +54,22 @@ class ExpandedView extends Component {
           {this.props.video && (
             <ul id='gall_tabs'>
               <li
-                id={this.props.expandedMain.includes('cloudfront') || this.state.expandedMain.includes('cloudfront') ? 'gall_selectedTab' : null}
+                id={this.state.expandedMain.includes('cloudfront') ? 'gall_selectedTab' : null}
                 onClick={this.viewVideo}>
                 RELATED VIDEOS
               </li>
               <li
-                id={!this.props.expandedMain.includes('cloudfront') && !this.state.expandedMain.includes('cloudfront') ? 'gall_selectedTab' : null}
+                id={!this.state.expandedMain.includes('cloudfront') ? 'gall_selectedTab' : null}
                 onClick={this.viewImages}>
                 IMAGES
               </li>
             </ul>
           )}
-          {this.props.expandedMain.includes('cloudfront') || this.state.expandedMain.includes('cloudfront') ? (
+          {this.state.expandedMain.includes('cloudfront') ? (
             <ExpandedVideoView />
           ) : (
             <ExpandedImagesView
-              expandedMain={this.state.expandedMain ? this.state.expandedMain : this.props.expandedMain}
+              expandedMain={this.state.expandedMain}
               name={this.props.name}
               images={this.props.images}
               video={this.props.video}
