@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ExpandedImageContent from './ExpandedImageContent.jsx';
-import ExpandedColumn from './ExpandedColumn.jsx';
+
+import ExpandedImagesView from './ExpandedImagesView.jsx';
 
 class ExpandedView extends Component {
   constructor(props) {
@@ -44,22 +44,17 @@ class ExpandedView extends Component {
               <li>IMAGES</li>
             </ul>
           )}
-          <div id={this.props.video ? 'gall_withVideo' : 'gall_withoutVideo'}>
-            <ExpandedImageContent
-              expandedMain={this.state.expandedMain ? this.state.expandedMain : this.props.expandedMain}
-              video={this.props.video}
-            />
-            <ExpandedColumn
-              name={this.props.name}
-              images={this.props.images}
-              video={this.props.video}
-              selectedThumbnail={this.state.selectedThumbnail ? this.state.selectedThumbnail : this.props.expandedMain}
-              hoveredThumbnail={this.state.hoveredThumbnail}
-              selectImage={this.selectImage}
-              onHoverOverThumbnail={this.handleHoverOverThumbnail}
-              onHoverOffThumbnail={this.handleHoverOffThumbnail}
-            />
-          </div>
+          <ExpandedImagesView
+            expandedMain={this.state.expandedMain ? this.state.expandedMain : this.props.expandedMain}
+            name={this.props.name}
+            images={this.props.images}
+            video={this.props.video}
+            selectedThumbnail={this.state.selectedThumbnail ? this.state.selectedThumbnail : this.props.expandedMain}
+            hoveredThumbnail={this.state.hoveredThumbnail}
+            selectImage={this.selectImage}
+            onHoverOverThumbnail={this.handleHoverOverThumbnail}
+            onHoverOffThumbnail={this.handleHoverOffThumbnail}
+          />
         </div>
       </div>
     );
