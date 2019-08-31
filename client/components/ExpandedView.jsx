@@ -6,8 +6,29 @@ class ExpandedView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expandedMain: this.props.main
+      expandedMain: this.props.main,
+      selectedThumbnail: '',
+      hoveredThumbnail: ''
     };
+
+    this.selectImage = this.selectImage.bind(this);
+    this.handleHoverOverThumbnail = this.handleHoverOverThumbnail.bind(this);
+    this.handleHoverOffThumbnail = this.handleHoverOffThumbnail.bind(this);
+  }
+
+  selectImage(e) {
+    this.setState({
+      expandedMain: e,
+      selectedThumbnail: e
+    });
+  }
+
+  handleHoverOverThumbnail(e) {
+    this.setState({hoveredThumbnail: e});
+  }
+
+  handleHoverOffThumbnail() {
+    this.setState({hoveredThumbnail: ''});
   }
 
   render() {
@@ -25,13 +46,18 @@ class ExpandedView extends Component {
           )}
           <div id={this.props.video ? 'gall_withVideo' : 'gall_withoutVideo'}>
             <ExpandedImageContent
-              expandedMain={this.props.expandedMain}
+              expandedMain={this.state.expandedMain ? this.state.expandedMain : this.props.expandedMain}
               video={this.props.video}
             />
             <ExpandedColumn
               name={this.props.name}
               images={this.props.images}
               video={this.props.video}
+              selectedThumbnail={this.state.selectedThumbnail ? this.state.selectedThumbnail : this.props.expandedMain}
+              hoveredThumbnail={this.state.hoveredThumbnail}
+              selectImage={this.selectImage}
+              onHoverOverThumbnail={this.handleHoverOverThumbnail}
+              onHoverOffThumbnail={this.handleHoverOffThumbnail}
             />
           </div>
         </div>

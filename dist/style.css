@@ -325,7 +325,10 @@
           transform: translate(-50%, -50%);
 }
 
-.gall_columnSpacing {
-  width: 2%;
-  max-width: 10px;
+#gall_expandedSelected {
+  border: 2px solid #ff8f00;
+}
+
+#gall_expandedHovered {
+  border: 2px solid #004b91;
 }

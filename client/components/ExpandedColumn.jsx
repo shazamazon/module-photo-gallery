@@ -7,7 +7,14 @@ const ExpandedColumn = (props) => {
       <div id='gall_name'>
         {props.name}
       </div>
-      <ExpandedThumbnails images={props.images} />
+      <ExpandedThumbnails
+        images={props.images}
+        selectedThumbnail={props.selectedThumbnail}
+        hoveredThumbnail={props.hoveredThumbnail}
+        selectImage={props.selectImage}
+        onHoverOverThumbnail={props.onHoverOverThumbnail}
+        onHoverOffThumbnail={props.onHoverOffThumbnail}
+      />
     </div>
   );
 };
