@@ -35,7 +35,7 @@ class ExpandedView extends Component {
     return (
       <div id='gall_disable'>
         <div id='gall_expanded' ref={node => this.modal = node}>
-          <span id='gall_close'>
+          <span id='gall_close' onClick={this.props.closeExpandedViewWithX}>
             <img src='https://shazamazon.s3.us-east-2.amazonaws.com/icons/close.png' />
           </span>
           {this.props.video && (

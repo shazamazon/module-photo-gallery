@@ -10,7 +10,7 @@ class MediaContainer extends Component {
   constructor() {
     super();
     this.state = {
-      id: 46,
+      id: 47,
       name: '',
       images: [],
       main: '',
@@ -29,6 +29,7 @@ class MediaContainer extends Component {
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.showExpandedView = this.showExpandedView.bind(this);
     this.closeExpandedView = this.closeExpandedView.bind(this);
+    this.closeExpandedViewWithX = this.closeExpandedViewWithX.bind(this);
     this.getImageDimensions = this.getImageDimensions.bind(this);
   }
 
@@ -101,6 +102,12 @@ class MediaContainer extends Component {
     }
   }
 
+  closeExpandedViewWithX() {
+    this.setState({isExpandedView: false}, () => {
+      document.removeEventListener('click', this.closeExpandedView);
+    });
+  }
+
   getImageDimensions(e) {
     console.log(e);
   }
@@ -129,11 +136,12 @@ class MediaContainer extends Component {
           {!this.state.main.includes('cloudfront') && <Caption caption={this.state.caption} />}
         </div>
         {this.state.isExpandedView && <ExpandedView
+          ref={node => this.expandedView = node}
           name={this.state.name}
           expandedMain={this.state.main}
           images={this.state.images}
           video={this.state.video}
-          ref={node => this.expandedView = node}
+          closeExpandedViewWithX={this.closeExpandedViewWithX}
         />}
       </>
     );
