@@ -39,7 +39,8 @@ class MediaContainer extends Component {
           name: data.ItemName,
           images: data.Photo,
           main: data.Photo[0],
-          video: data.Video
+          video: data.Video,
+          hoveredThumbnail: data.Photo[0]
         });
       });
   }
