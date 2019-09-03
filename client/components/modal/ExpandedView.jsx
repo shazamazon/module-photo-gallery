@@ -36,7 +36,10 @@ class ExpandedView extends Component {
 
   viewImages(e) {
     e.preventDefault();
-    this.setState({expandedMain: this.props.images[0]});
+    this.setState({
+      expandedMain: this.props.images[0],
+      selectedThumbnail: this.props.images[0]
+    });
   }
 
   viewVideo(e) {
@@ -52,7 +55,7 @@ class ExpandedView extends Component {
             <img src='https://shazamazon.s3.us-east-2.amazonaws.com/icons/close.png' />
           </span>
           {this.props.video && (
-            <ul id='gall_tabs'>
+            <ul className='gall_tabs'>
               <li
                 id={this.state.expandedMain.includes('cloudfront') ? 'gall_selectedTab' : null}
                 onClick={this.viewVideo}>
@@ -66,7 +69,16 @@ class ExpandedView extends Component {
             </ul>
           )}
           {this.state.expandedMain.includes('cloudfront') ? (
-            <ExpandedVideoView />
+            <ExpandedVideoView
+              name={this.props.name}
+              video={this.props.video}
+              isVideoLiked={this.props.isVideoLiked}
+              isVideoDisliked={this.props.isVideoDisliked}
+              numberOfLikes={this.props.numberOfLikes}
+              numberOfDislikes={this.props.numberOfDislikes}
+              onLikeClick={this.props.onLikeClick}
+              onDislikeClick={this.props.onDislikeClick}
+            />
           ) : (
             <ExpandedImagesView
               expandedMain={this.state.expandedMain}

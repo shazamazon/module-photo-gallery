@@ -10,7 +10,7 @@ class MediaContainer extends Component {
   constructor() {
     super();
     this.state = {
-      id: 46,
+      id: Math.floor(Math.random() * 105),
       name: '',
       images: [],
       main: '',
@@ -18,6 +18,10 @@ class MediaContainer extends Component {
       caption: 'Roll over image to zoom in',
       hoveredThumbnail: '',
       isExpandedView: false,
+      isVideoLiked: false,
+      isVideoDisliked: false,
+      numberOfLikes: Math.floor(Math.random() * 15),
+      numberOfDislikes: Math.floor(Math.random() * 15),
       x: 0,
       y: 0
     };
@@ -30,6 +34,8 @@ class MediaContainer extends Component {
     this.showExpandedView = this.showExpandedView.bind(this);
     this.closeExpandedView = this.closeExpandedView.bind(this);
     this.closeExpandedViewWithX = this.closeExpandedViewWithX.bind(this);
+    this.handleLikeClick = this.handleLikeClick.bind(this);
+    this.handleDislikeClick = this.handleDislikeClick.bind(this);
     this.getImageDimensions = this.getImageDimensions.bind(this);
   }
 
@@ -108,6 +114,52 @@ class MediaContainer extends Component {
     });
   }
 
+  handleLikeClick() {
+    if (this.state.isVideoLiked) {
+      this.setState({
+        isVideoLiked: false,
+        numberOfLikes: this.state.numberOfLikes - 1
+      });
+    } else {
+      if (this.state.isVideoDisliked) {
+        this.setState({
+          isVideoLiked: true,
+          numberOfLikes: this.state.numberOfLikes + 1,
+          isVideoDisliked: false,
+          numberOfDislikes: this.state.numberOfDislikes - 1
+        });
+      } else {
+        this.setState({
+          isVideoLiked: true,
+          numberOfLikes: this.state.numberOfLikes + 1
+        });
+      }
+    }
+  }
+
+  handleDislikeClick() {
+    if (this.state.isVideoDisliked) {
+      this.setState({
+        isVideoDisliked: false,
+        numberOfDislikes: this.state.numberOfDislikes - 1
+      });
+    } else {
+      if (this.state.isVideoLiked) {
+        this.setState({
+          isVideoDisliked: true,
+          numberOfDislikes: this.state.numberOfDislikes + 1,
+          isVideoLiked: false,
+          numberOfDislikes: this.state.numberOfDislikes - 1
+        });
+      } else {
+        this.setState({
+          isVideoDisliked: true,
+          numberOfDislikes: this.state.numberOfDislikes + 1
+        });
+      }
+    }
+  }
+
   getImageDimensions(e) {
     console.log(e);
   }
@@ -141,7 +193,13 @@ class MediaContainer extends Component {
           expandedMain={this.state.main}
           images={this.state.images}
           video={this.state.video}
+          isVideoLiked={this.state.isVideoLiked}
+          isVideoDisliked={this.state.isVideoDisliked}
+          numberOfLikes={this.state.numberOfLikes}
+          numberOfDislikes={this.state.numberOfDislikes}
           closeExpandedViewWithX={this.closeExpandedViewWithX}
+          onLikeClick={this.handleLikeClick}
+          onDislikeClick={this.handleDislikeClick}
         />}
       </>
     );
