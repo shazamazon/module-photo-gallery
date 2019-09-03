@@ -24,7 +24,7 @@ class MediaContainer extends Component {
       numberOfDislikes: Math.floor(Math.random() * 15),
       x: 0,
       y: 0,
-      dns: ec2-3-17-158-128.us-east-2.compute.amazonaws.com
+      dns: 'ec2-3-17-158-128.us-east-2.compute.amazonaws.com:8369'
     };
 
     this.selectView = this.selectView.bind(this);
