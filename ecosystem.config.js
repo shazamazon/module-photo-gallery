@@ -10,7 +10,7 @@ module.exports = {
       key: '~/.ssh/FEC.pem',
       ref: 'origin/master',
       repo: 'git@github.com:shazamazon/module-photo-gallery',
-      path: '/home/ubuntu/module-photo-gallery',
+      path: '/home/ubuntu/',
       'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js'
     }
   }
