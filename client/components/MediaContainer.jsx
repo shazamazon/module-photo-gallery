@@ -24,7 +24,7 @@ class MediaContainer extends Component {
       numberOfDislikes: Math.floor(Math.random() * 15),
       x: 0,
       y: 0,
-      dns: 'http://3.15.191.238:8369'
+      dns: 'http://3.15.191.238'
     };
 
     this.selectView = this.selectView.bind(this);
@@ -41,7 +41,7 @@ class MediaContainer extends Component {
   }
 
   getItem() {
-    axios.get(`${this.state.dns}` + '/item/' + `${this.state.id}`)
+    axios.get(`${this.state.dns}/item/${this.state.id}`)
       .then(({ data }) => {
         this.setState({
           name: data.ItemName,
