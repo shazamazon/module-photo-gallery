@@ -3,10 +3,15 @@
   font: 13px/19px Arial, sans-serif;
   /* Width of component should always be 50% */
   width: 50%;
-  max-width: 50%;
+  /* max-width: 50%; */
 }
 
-/* Additional images */
+/*
+  ========================================
+  Additional Images
+  ========================================
+*/
+
 #gall_additional {
   display: flex;
   flex-direction: column;
@@ -25,9 +30,10 @@
   overflow: hidden;
   border: 1px solid #a2a6ac;
   border-radius: 2px;
+  cursor: pointer;
 }
 
-.gall_thumbnail:hover {
+#gall_hover {
   border-color: #e77600;
   box-shadow: 0 0 3px 3px rgba(228, 121, 17, .5);
 }
@@ -35,8 +41,8 @@
 .gall_thumbnail img {
   /* Positions image in center of div holding image */
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   object-fit: contain;
   width: 100%;
   height: 100%;
@@ -45,13 +51,59 @@
           transform: translate(-50%, -50%);
 }
 
+.gall_thumbnail video {
+  position: absolute;
+  top: 23%;
+  object-fit: contain;
+  width: 100%;
+}
+
 /* Space between thumbnail images */
 .gall_spacing {
   height: 2%;
   max-height: 10px;
 }
 
-/* Main image */
+#gall_vidthumb {
+  background-color: #555;
+}
+
+#gall_vidthumb img {
+  top: 0%;
+  left: 20%;
+  width: 60%;
+  transform: none;
+  z-index: 1;
+}
+
+#gall_hoverVideo {
+  background-color: #555;
+  border-color: #e77600;
+  box-shadow: 0 0 3px 3px rgba(228, 121, 17, .5);
+}
+
+#gall_hoverVideo img {
+  top: 0%;
+  left: 20%;
+  width: 60%;
+  transform: none;
+  z-index: 1;
+}
+
+#gall_vidcap {
+  color: #555;
+  font-size: .75vw;
+  font-weight: 700;
+  line-height: 1.9vw;
+  text-align: center;
+}
+
+/*
+  ========================================
+  Main Image
+  ========================================
+*/
+
 #gall_wrapper {
   display: flex;
   flex-direction: column;
@@ -61,17 +113,18 @@
 
 #gall_main {
   position: relative;
-  width: 47vw;
-  height: 47vw;
+  width: 46vw;
+  height: 46vw;
   max-height: 700px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 #gall_main img {
   /* Positions image in center of div holding image */
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   object-fit: contain;
   width: 99%;
   height: 100%;
@@ -81,5 +134,350 @@
 }
 
 #gall_caption {
+  font-size: 1.2vw;
   text-align: center;
+}
+
+#gall_video {
+  position: relative;
+  width: 46vw;
+  height: 46vw;
+  max-height: 700px;
+  overflow: hidden;
+}
+
+#gall_video video {
+  width: 100%;
+  padding-left: 19px;
+}
+
+#gall_video:before {
+  content: '';
+  position: absolute;
+  background: no-repeat 50% 24%/16% url('https://shazamazon.s3.us-east-2.amazonaws.com/icons/play_icon.jpg');
+  border-radius: 5px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/*
+  ========================================
+  Images Modal
+  ========================================
+*/
+
+#gall_disable {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(0,0,0,.4);
+  z-index: 1;
+}
+
+#gall_expanded {
+  display: block;
+  position: absolute;
+  top: 75px;
+  left: 37.5px;
+  width: 1205px;
+  height: 548px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, .75);
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .25);
+}
+
+/* Button to close modal */
+#gall_close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  top: 50%;
+  width: 27px;
+  height: 27px;
+  margin: 6px 6px 0 0;
+  cursor: pointer;
+}
+
+#gall_close img {
+  width: 9px;
+  height: 9px;
+}
+
+.gall_tabs {
+  width: 1073px;
+  height: 43px;
+  padding: 0 15px;
+  border-bottom: 2px solid #e7e7e7;
+  margin: 15px 35px 0 35px;
+}
+
+.gall_tabs li {
+  display: inline-block;
+  margin: 15px 15px 0 15px;
+  color: #6c7778;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#gall_selectedTab {
+  padding-bottom: 9px;
+  border-bottom: 2px solid #ff8f00;
+  color: #002f36;
+}
+
+#gall_withVideo {
+  display: flex;
+}
+
+#gall_withoutVideo {
+  display: flex;
+  margin-top: 15px;
+}
+
+#gall_expandedImageWithVideo {
+  position: relative;
+  width: 838px;
+  height: 474px;
+  padding-right: 15px;
+  margin-left: 18px;
+}
+
+#gall_expandedImageWithVideo img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  object-fit: contain;
+  width: 100%;
+  height: 95%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+#gall_expandedImageWithoutVideo {
+  position: relative;
+  width: 838px;
+  height: 474px;
+  padding-right: 15px;
+  margin: 20px 0 0 18px;
+}
+
+#gall_expandedImageWithoutVideo img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  object-fit: contain;
+  width: 100%;
+  height: 95%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+#gall_expandedColumn {
+  font: 17px/19px Verdana, Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
+  width: 280px;
+  height: 444px;
+  padding-right: 15px;
+  margin-top: 30px;
+}
+
+#gall_name {
+  padding-right: 15px;
+}
+
+#gall_expandedThumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  width: 280px;
+  height: 323px;
+  padding: 15px 0;
+  margin-bottom: 15px;
+  overflow-y: auto;
+}
+
+.gall_expandedThumbnail {
+  position: relative;
+  width: 4.1vw;
+  height: 4.1vw;
+  max-width: 50px;
+  max-height: 50px;
+  overflow: hidden;
+  border: 2px solid #d5dbdb;
+  margin: 0 15px 15px 0;
+  cursor: pointer;
+}
+
+.gall_expandedThumbnail img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+#gall_expandedSelected {
+  border: 2px solid #ff8f00;
+}
+
+#gall_expandedHovered {
+  border: 2px solid #004b91;
+}
+
+/*
+  ========================================
+  Video Modal
+  ========================================
+*/
+
+#gall_expandedVideoView {
+  display: flex;
+  margin-top: 3.5vh;
+}
+
+#gall_expandedVideoWithName {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 833px;
+  height: 432.13px;
+  padding-right: 20px;
+}
+
+#gall_expandedVideo {
+  position: relative;
+  width: 43vw;
+  height: 140vw;
+  max-width: 546px;
+  max-height: 309px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#gall_expandedVideo video {
+  width: 100%;
+  height: 44.5vh;
+}
+
+.gall_feedback {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: relative;
+  width: 530px;
+  height: 100vh;
+  max-height: 40px;
+  margin: 0 auto;
+  padding-left: 16px;
+  background-color: #f1eded;
+  border-radius: 0 0 4px 4px;
+}
+
+.gall_feedback p {
+  position: absolute;
+  top: 50%;
+  margin: 0;
+  transform: translate(0, -50%);
+}
+
+.gall_feedback span {
+  margin: auto 0;
+}
+
+.gall_feedback img {
+  width: 2.5vw;
+  margin-left: 1vw;
+  mix-blend-mode: multiply;
+  cursor: pointer;
+}
+
+#gall_share {
+  width: 1.7vw;
+  height: 2.2vw;
+  margin: .3vw 0 0 27vw;
+}
+
+#gall_expandedName {
+  position: relative;
+  width: 43vw;
+  height: 5vw;
+  max-width: 546px;
+  max-height: 309px;
+  margin: 0 auto;
+  text-align: left;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.255;
+}
+
+#gall_expandedName p {
+  position: absolute;
+  top: 50%;
+  margin: 0;
+  transform: translate(0, -50%);
+}
+
+#gall_expandedRelatedVideos {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  max-height: 139px;
+  padding-right: 10px;
+}
+
+#gall_expandedRelatedVideos p {
+  width: 280px;
+  height: 18px;
+  padding: 7px 10px;
+  border-radius: 4px;
+  margin-top: -.1vh;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #373e3e;
+  background-color: #eaeded;
+}
+
+#gall_expandedVideoThumbnailWithName {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+#gall_expandedVideoThumbnail {
+  width: 8.5vw;
+  max-width: 116px;
+  max-height: 61px;
+  border: 2px solid #ff8f01;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+#gall_expandedVideoThumbnail video {
+  width: 99.5%;
+  height: auto;
+  border-radius: 2px;
+}
+
+#gall_expandedThumnbnailName {
+  max-width: 164px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4em;
+  color: #111;
 }
