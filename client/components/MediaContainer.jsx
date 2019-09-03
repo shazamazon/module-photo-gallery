@@ -71,6 +71,13 @@ class MediaContainer extends Component {
     });
   }
 
+  selectVideo(e) {
+    this.setState({
+      main: e,
+      video: e
+    });
+  }
+
   handleMouseEnter(e) {
     this.setState({
       caption: 'Click image to open expanded view',
