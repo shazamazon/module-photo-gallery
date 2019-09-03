@@ -49,7 +49,8 @@ class MediaContainer extends Component {
           main: data.Photo[0],
           video: data.Video,
           hoveredThumbnail: data.Photo[0]
-        })
+        });
+      })
       .catch(err => {
         console.log(err);
       });
