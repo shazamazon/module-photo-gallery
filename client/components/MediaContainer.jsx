@@ -23,7 +23,8 @@ class MediaContainer extends Component {
       numberOfLikes: Math.floor(Math.random() * 15),
       numberOfDislikes: Math.floor(Math.random() * 15),
       x: 0,
-      y: 0
+      y: 0,
+      dns: ec2-3-17-158-128.us-east-2.compute.amazonaws.com
     };
 
     this.selectView = this.selectView.bind(this);
@@ -40,7 +41,7 @@ class MediaContainer extends Component {
   }
 
   getItem() {
-    axios.get(`/item/${this.state.id}`)
+    axios.get(`${this.state.dns}/item/${this.state.id}`)
       .then(({ data }) => {
         this.setState({
           name: data.ItemName,
