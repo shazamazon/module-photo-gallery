@@ -23,7 +23,8 @@ class MediaContainer extends Component {
       numberOfLikes: Math.floor(Math.random() * 15),
       numberOfDislikes: Math.floor(Math.random() * 15),
       x: 0,
-      y: 0
+      y: 0,
+      dns: 'http://3.15.191.238:8369'
     };
 
     this.selectView = this.selectView.bind(this);
@@ -40,7 +41,7 @@ class MediaContainer extends Component {
   }
 
   getItem() {
-    axios.get(`/item/${this.state.id}`)
+    axios.get(`${this.state.dns}` + '/item/' + `${this.state.id}`)
       .then(({ data }) => {
         this.setState({
           name: data.ItemName,
@@ -48,7 +49,9 @@ class MediaContainer extends Component {
           main: data.Photo[0],
           video: data.Video,
           hoveredThumbnail: data.Photo[0]
-        });
+        })
+      .catch(err => {
+        console.log(err);
       });
   }
 
