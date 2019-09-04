@@ -1,9 +1,22 @@
 #gall_root {
   display: flex;
-  font: 13px/19px Arial, sans-serif;
+  font-size: 13px;
+  font-size: calc(1.5vw);
+  line-height: 19px;
+  font-family: Arial, sans-serif;
   /* Width of component should always be 50% */
   width: 50%;
-  /* max-width: 50%; */
+}
+
+/* Prevents text from scaling above specified font size */
+@media (min-width: 900px) {
+  #gall_root {
+    font-size: 13px;
+  }
+}
+
+#gall_modal {
+  width: 100%;
 }
 
 /*
@@ -127,14 +140,14 @@
   left: 50%;
   object-fit: contain;
   width: 99%;
-  height: 100%;
+  height: 95%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
 
 #gall_caption {
-  font-size: 1.2vw;
+  /* font-size: 1vw; */
   text-align: center;
 }
 
@@ -183,10 +196,11 @@
 #gall_expanded {
   display: block;
   position: absolute;
-  top: 75px;
-  left: 37.5px;
-  width: 1205px;
-  height: 548px;
+  width: 95vw;
+  height: 41.5vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: white;
   border: 1px solid rgba(0, 0, 0, .75);
   border-radius: 4px;

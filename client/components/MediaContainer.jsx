@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 import MainImage from './MainImage.jsx';
@@ -10,7 +11,8 @@ class MediaContainer extends Component {
   constructor() {
     super();
     this.state = {
-      id: Math.floor(Math.random() * 105),
+      id: 46,
+      // Math.floor(Math.random() * 105)
       name: '',
       images: [],
       main: '',
@@ -191,7 +193,7 @@ class MediaContainer extends Component {
           />
           {!this.state.main.includes('cloudfront') && <Caption caption={this.state.caption} />}
         </div>
-        {this.state.isExpandedView && <ExpandedView
+        {this.state.isExpandedView && ReactDOM.createPortal(<ExpandedView
           ref={node => this.expandedView = node}
           name={this.state.name}
           expandedMain={this.state.main}
@@ -204,7 +206,7 @@ class MediaContainer extends Component {
           closeExpandedViewWithX={this.closeExpandedViewWithX}
           onLikeClick={this.handleLikeClick}
           onDislikeClick={this.handleDislikeClick}
-        />}
+        />, document.getElementById('gall_modal'))}
       </>
     );
   }
