@@ -15,17 +15,15 @@ const ExpandedVideoView = (props) => {
           <span>{props.numberOfDislikes}</span>
           <img id='gall_share' src='https://shazamazon.s3.us-east-2.amazonaws.com/icons/share2.png'/>
         </div>
-        <div id='gall_expandedName'>
-          <p>{props.name}</p>
-        </div>
+        <div id='gall_expandedName'>{props.name}</div>
       </div>
       <div id='gall_expandedRelatedVideos'>
-        <p>Related videos (1)</p>
+        <span>Related videos (1)</span>
         <div id='gall_expandedVideoThumbnailWithName'>
           <div id='gall_expandedVideoThumbnail'>
             <video src={props.video}></video>
           </div>
-          <div id='gall_expandedThumnbnailName'>{props.name.slice(0, 38) + '...'}</div>
+          <div id='gall_expandedThumbnailName'>{props.name}</div>
         </div>
       </div>
     </div>
