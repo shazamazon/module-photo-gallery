@@ -492,13 +492,14 @@
   margin-top: -.1vw;
   margin-bottom: .5vw;
   margin-left: -.5vw;
-  font-size: calc(1.2vw);
+  font-size: calc(1vw);
   font-weight: 700;
+  line-height: 1.1vw;
   color: #373e3e;
   background-color: #eaeded;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
   #gall_expandedRelatedVideos span {
     font-size: 12px;
   }
@@ -536,16 +537,14 @@
   width: 10vw;
   height: 4vw;
   max-width: 200px;
-  margin-top: -.1vw;
+  max-height: 50px;
   font-size: calc(1.1vw);
   font-weight: 400;
-  line-height: 1.2em;
   color: #111;
 }
 
 @media (min-width: 1400px) {
   #gall_expandedThumbnailName {
     font-size: 15px;
-    margin-top: -.4vw;
   }
 }
