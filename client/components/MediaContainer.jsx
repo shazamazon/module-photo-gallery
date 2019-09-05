@@ -63,6 +63,7 @@ class MediaContainer extends Component {
   }
 
   componentDidMount() {
+    alert('LEAVE ME ALONE!!!!');
     this.getItem(this.state.id);
     window.addEventListener('clickedProduct', event => {
       const product = event.detail;
