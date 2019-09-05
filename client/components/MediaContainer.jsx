@@ -11,7 +11,7 @@ class MediaContainer extends Component {
   constructor() {
     super();
     this.state = {
-      id: 46,
+      id: 66,
       // Math.floor(Math.random() * 105),
       name: '',
       images: [],
@@ -65,7 +65,6 @@ class MediaContainer extends Component {
   componentDidMount() {
     this.getItem(this.state.id);
     window.addEventListener('clickedProduct', event => {
-      console.log('flrea');
       const product = event.detail;
       if (product) {
         this.setState({id: product}, () => {
