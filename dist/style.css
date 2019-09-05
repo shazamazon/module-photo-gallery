@@ -256,14 +256,14 @@
 }
 
 #gall_selectedTab {
-  padding-bottom: .55vw;
+  padding-bottom: .45vw;
   border-bottom: 2px solid #ff8f00;
   color: #002f36;
 }
 
 @media (min-width: 1590px) {
   #gall_selectedTab {
-    padding-bottom: .65vw;
+    padding-bottom: .7vw;
   }
 }
 
@@ -514,12 +514,14 @@
 }
 
 #gall_expandedVideoThumbnail {
+  position: relative;
   width: 7vw;
   max-width: 110px;
   max-height: 60px;
   border: 2px solid #ff8f01;
   border-radius: 4px;
   margin-right: .6vw;
+  cursor: pointer;
 }
 
 #gall_expandedVideoThumbnail video {
@@ -527,6 +529,17 @@
   height: 100%;
   object-fit: fill;
   border-radius: 2px;
+}
+
+#gall_expandedVideoThumbnail:before {
+  content: '';
+  position: absolute;
+  background-image: url('https://shazamazon.s3.us-east-2.amazonaws.com/icons/thumbnail_overlay.png');
+  background-size: 100% auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 #gall_expandedThumbnailName {
@@ -542,6 +555,7 @@
   font-size: calc(1.1vw);
   font-weight: 400;
   color: #111;
+  cursor: pointer;
 }
 
 @media (min-width: 1400px) {
