@@ -11,8 +11,8 @@ class MediaContainer extends Component {
   constructor() {
     super();
     this.state = {
-      id: 46,
-      // Math.floor(Math.random() * 105)
+      id: 64,
+      // Math.floor(Math.random() * 105),
       name: '',
       images: [],
       main: '',
@@ -42,8 +42,12 @@ class MediaContainer extends Component {
     this.getImageDimensions = this.getImageDimensions.bind(this);
   }
 
-  getItem() {
-    axios.get(`${this.state.dns}/item/${this.state.id}`)
+  getItem(id) {
+    axios.get(`${this.state.dns}/item`, {
+      params: {
+        id: id
+      }
+    })
       .then(({ data }) => {
         this.setState({
           name: data.ItemName,
@@ -59,7 +63,15 @@ class MediaContainer extends Component {
   }
 
   componentDidMount() {
-    this.getItem();
+    this.getItem(this.state.id);
+    window.addEventListener('clickedProduct', event => {
+      const product = event.detail;
+      if (product) {
+        this.setState({id: product}, () => {
+          this.getItem(this.state.id);
+        });
+      }
+    });
   }
 
   selectView(e) {
