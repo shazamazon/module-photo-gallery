@@ -3,7 +3,7 @@
   font-size: 13px;
   font-size: calc(1.5vw);
   line-height: 19px;
-  font-family: Arial, sans-serif;
+  font-family: 'Amazon Ember', Arial, sans-serif;
   /* Width of component should always be 50% */
   width: 50%;
 }
