@@ -13,8 +13,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/item/:id', (req, res) => {
-  db.findItem(req.params.id)
+app.get('/item', (req, res) => {
+  db.findItem(req.query.id)
     .then(item => {
       res.status(200).send(item[0]);
     })
