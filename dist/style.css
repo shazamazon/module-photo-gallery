@@ -416,6 +416,7 @@
 
 #gall_expandedVideo video {
   width: 100%;
+  height: inherit;
 }
 
 .gall_feedback {
