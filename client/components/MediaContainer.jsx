@@ -11,7 +11,7 @@ class MediaContainer extends Component {
   constructor() {
     super();
     this.state = {
-      id: 64,
+      id: 66,
       // Math.floor(Math.random() * 105),
       name: '',
       images: [],
