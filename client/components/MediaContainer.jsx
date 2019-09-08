@@ -13,7 +13,7 @@ class MediaContainer extends Component {
   constructor() {
     super();
     this.state = {
-      id: 100,
+      id: 38,
       name: '',
       images: [],
       main: '',
@@ -24,15 +24,13 @@ class MediaContainer extends Component {
       lensOffsetY: '0px',
       lensLeftDisplacement: '0px',
       lensTopDisplacement: '0px',
-      scaleX: 0,
-      scaleY: 0,
-      zoomBackgroundPosition: null,
+      zoomFactor: 2,
+      zoomBackgroundSize: '',
+      zoomBackgroundPosition: '',
       containerOffsetX: '0px',
       containerOffsetY: '0px',
       imageWidth: '0px',
       imageHeight: '0px',
-      originalImageWidth: '0px',
-      originalImageHeight: '0px',
       columnOffsetX: '0px',
       columnOffsetY: '0px',
       windowWidth: window.innerWidth * .47,
@@ -146,14 +144,12 @@ class MediaContainer extends Component {
     });
   }
 
-  getImageDimensions(containerWidth, containerHeight, imageWidth, imageHeight, originalWidth, originalHeight) {
+  getImageDimensions(containerWidth, containerHeight, imageWidth, imageHeight) {
     this.setState({
       containerOffsetX: containerWidth,
       containerOffsetY: containerHeight,
       imageWidth: imageWidth,
-      imageHeight: imageHeight,
-      originalImageWidth: originalWidth,
-      originalImageHeight: originalHeight
+      imageHeight: imageHeight
     });
   }
 
@@ -170,17 +166,12 @@ class MediaContainer extends Component {
     let cursorY = e.pageY;
     let lensX = cursorX - this.state.lensOffsetX / 2;
     let lensY = cursorY - this.state.lensOffsetY / 2;
-    let scaleX = this.state.windowWidth / this.state.lensOffsetX;
-    let scaleY = this.state.windowHeight / this.state.lensOffsetY;
     let imagePadding = (this.state.containerOffsetX - this.state.imageWidth) / 2;
     let containerMargin = this.state.containerOffsetX * 0.01 + this.state.imageWidth * 0.01;
     let leftImageDisplacement = 8 + this.state.columnOffsetX + containerMargin + imagePadding;
     let rightImageDisplacement = window.innerWidth / 2 - imagePadding;
 
-    // console.log('container width', this.state.containerOffsetX, 'image width', this.state.imageWidth, 'image padding', imagePadding);
-    // console.log('column width', this.state.columnOffsetX, 'container margin', containerMargin);
-    // console.log('x', e.pageX, 'y', e.pageY);
-
+    // Prevents lens from moving off image
     if (lensX <= leftImageDisplacement) {
       lensX = leftImageDisplacement;
     }
@@ -203,12 +194,21 @@ class MediaContainer extends Component {
       document.removeEventListener('click', this.showExpandedView);
     }
 
+    let ratio = this.state.containerOffsetX / this.state.containerOffsetY;
+    let heightZoomFactor = (this.state.containerOffsetX * this.state.zoomFactor) / (this.state.containerOffsetY * ratio);
+    let backgroundPosition;
+
+    if (lensX - leftImageDisplacement / this.state.imageWidth - leftImageDisplacement <= 0.5) {
+      backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth - leftImageDisplacement ) * 100}% ${(lensY - 20 / window.innerHeight) / (this.state.imageHeight - 20 / window.innerHeight) * 100}%`;
+    } else {
+      backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth - leftImageDisplacement ) * 100}% ${(lensY - 20 / window.innerHeight) / (this.state.imageHeight - 20 / window.innerHeight) * 100}%`;
+    }
+
     this.setState({
       lensLeftDisplacement: lensX.toString() + 'px',
       lensTopDisplacement: lensY.toString() + 'px',
-      scaleX: this.state.windowWidth / this.state.lensOffsetX,
-      scaleY: this.state.windowHeight / this.state.lensOffsetY,
-      zoomBackgroundPosition: '-' + (lensX * scaleX).toString() + 'px -' + (lensY * scaleY).toString() + 'px'
+      zoomBackgroundSize: (this.state.containerOffsetX * this.state.zoomFactor).toString() + 'px auto',
+      zoomBackgroundPosition: backgroundPosition
     });
   }
 
@@ -236,9 +236,7 @@ class MediaContainer extends Component {
   showExpandedView(e) {
     console.log('click');
     this.setState({isExpandedView: true, isImageMagnified: false}, () => {
-      // isImageMagnified: false;
       document.removeEventListener('click', this.showExpandedView);
-      // window.removeEventListener('mousemove', this.moveLens);
       document.addEventListener('click', this.closeExpandedView);
     });
   }
@@ -341,13 +339,8 @@ class MediaContainer extends Component {
           main={this.state.main}
           windowWidth={this.state.windowWidth}
           windowHeight={this.state.windowHeight}
-          containerOffsetX={this.state.containerOffsetX}
-          containerOffsetY={this.state.containerOffsetY}
-          scaleX={this.state.scaleX}
-          scaleY={this.state.scaleY}
-          zoomBackgroundPosition={this.state.zoomBackgroundPosition}
-          // onMouseEnter={this.state.handleMouseEnter}
-          // onMouseLeave={this.state.handleMouseLeave}
+          backgroundSize={this.state.zoomBackgroundSize}
+          backgroundPosition={this.state.zoomBackgroundPosition}
         />, document.getElementById('gall_zoomedContainer'))}
 
         {(this.state.isExpandedView) && ReactDOM.createPortal(<ExpandedView

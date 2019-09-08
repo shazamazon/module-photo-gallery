@@ -9,8 +9,8 @@ const ZoomedImage = (props) => {
         height: (props.windowHeight).toString() + 'px',
         backgroundImage: `url(${props.main})`,
         backgroundRepeat: 'no-repeat',
-        backgroundSize: (props.containerOffsetX * props.scaleX).toString() + 'px ' + (props.containerOffsetY * props.scaleY).toString() + 'px',
-        backgroundPosition: props.zoomBackgroundPosition
+        backgroundSize: props.backgroundSize,
+        backgroundPosition: props.backgroundPosition
       }}
       onMouseEnter={props.onMouseEnter}
     ></div>

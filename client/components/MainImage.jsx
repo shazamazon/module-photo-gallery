@@ -40,9 +40,6 @@ class MainImage extends Component {
     let imageWidth;
     let imageHeight;
 
-    // imageWidth = this.image.offsetWidth * .99;
-    // imageHeight = imageWidth / ratio;
-
     if (naturalWidth > naturalHeight) {
       imageWidth = this.image.offsetWidth * .99;
       imageHeight = imageWidth / ratio;
@@ -53,11 +50,8 @@ class MainImage extends Component {
       imageHeight = this.image.offsetHeight;
       imageWidth = imageHeight * ratio;
     }
-    console.log(this.image.offsetWidth, this.image.offsetHeight);
-    console.log('imagewidth', imageWidth, 'imageheight', imageHeight)
-    console.log('naturalwidth', naturalWidth, 'naturalheight', naturalHeight)
 
-    this.props.getImageDimensions(this.image.offsetWidth, this.image.offsetHeight, imageWidth, imageHeight, naturalWidth, naturalHeight);
+    this.props.getImageDimensions(this.image.offsetWidth, this.image.offsetHeight, imageWidth, imageHeight);
   }
 
   render() {
@@ -66,7 +60,6 @@ class MainImage extends Component {
         <div
           id={this.props.main.includes('cloudfront') ? 'gall_video' : 'gall_main'}
           onMouseEnter={e => this.props.onMouseLeave(e)}
-          // onClick={this.props.showExpandedView}
         >
           {this.props.main.includes('cloudfront') ? (
             <video
