@@ -182,8 +182,8 @@ class MediaContainer extends Component {
     if (lensY > this.state.containerOffsetY - this.state.lensOffsetY + 120) {
       lensY = this.state.containerOffsetY - this.state.lensOffsetY + 120;
     }
-    if (lensY <= 20) {
-      lensY = 20;
+    if (lensY <= 120) {
+      lensY = 120;
     }
 
     if (e.pageX > leftImageDisplacement && e.pageX < rightImageDisplacement && e.pageY > 120 && e.pageY < 120 + this.state.containerOffsetY) {
