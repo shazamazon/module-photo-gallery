@@ -5,20 +5,39 @@ import axios from 'axios';
 import MainImage from './MainImage.jsx';
 import AdditionalMedia from './AdditionalMedia.jsx';
 import Caption from './Caption.jsx';
+import ZoomedImage from './zoom/ZoomedImage.jsx';
+import MagnifierLens from './zoom/MagnifierLens.jsx';
 import ExpandedView from './modal/ExpandedView.jsx';
 
 class MediaContainer extends Component {
   constructor() {
     super();
     this.state = {
-      id: 66,
-      // Math.floor(Math.random() * 105),
+      id: 38,
       name: '',
       images: [],
       main: '',
       video: null,
       caption: 'Roll over image to zoom in',
       hoveredThumbnail: '',
+      lensOffsetX: '0px',
+      lensOffsetY: '0px',
+      lensLeftDisplacement: '0px',
+      lensTopDisplacement: '0px',
+      scaleX: 0,
+      scaleY: 0,
+      zoomBackgroundPosition: null,
+      containerOffsetX: '0px',
+      containerOffsetY: '0px',
+      imageWidth: '0px',
+      imageHeight: '0px',
+      imageOffsetX: '0px',
+      imageOffsetY: '0px',
+      columnOffsetX: '0px',
+      columnOffsetY: '0px',
+      windowWidth: window.innerWidth * .47,
+      windowHeight: window.innerHeight * .8,
+      isImageMagnified: false,
       isExpandedView: false,
       isVideoLiked: false,
       isVideoDisliked: false,
@@ -32,14 +51,19 @@ class MediaContainer extends Component {
     this.selectView = this.selectView.bind(this);
     this.selectVideo = this.selectVideo.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.getLensDimensions = this.getLensDimensions.bind(this);
+    this.getImageDimensions = this.getImageDimensions.bind(this);
+    this.getColumnDimensions = this.getColumnDimensions.bind(this);
+    this.moveLens = this.moveLens.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+    this.showZoom = this.showZoom.bind(this);
+    this.hideZoom = this.hideZoom.bind(this);
     this.showExpandedView = this.showExpandedView.bind(this);
     this.closeExpandedView = this.closeExpandedView.bind(this);
     this.closeExpandedViewWithX = this.closeExpandedViewWithX.bind(this);
     this.handleLikeClick = this.handleLikeClick.bind(this);
     this.handleDislikeClick = this.handleDislikeClick.bind(this);
-    this.getImageDimensions = this.getImageDimensions.bind(this);
   }
 
   getItem(id) {
@@ -72,6 +96,11 @@ class MediaContainer extends Component {
         });
       }
     });
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
   }
 
   selectView(e) {
@@ -91,29 +120,127 @@ class MediaContainer extends Component {
 
   handleMouseEnter(e) {
     this.setState({
-      caption: 'Click image to open expanded view',
-      x: e.clientX,
-      y: e.clientY
-    }, () => console.log('X: ', this.state.x, ', Y: ', this.state.y));
-  }
-
-  handleMouseMove(e) {
-    this.setState({
-      x: e.clientX,
-      y: e.clientY
-    }, () => console.log('X: ', this.state.x, ', Y: ', this.state.y));
+      isImageMagnified: !this.state.isImageMagnified,
+      caption: this.state.caption === 'Click image to open expanded view' ? 'Roll over image to zoom in' : 'Click image to open expanded view'
+    }, () => {
+      document.addEventListener('mousemove', this.moveLens);
+    });
+    console.log('mouse in');
   }
 
   handleMouseLeave(e) {
+    console.log('mouse leave');
+    this.setState({
+      isImageMagnified: false,
+      caption: 'Roll over image to zoom in'
+    }, () => {
+      document.removeEventListener('mousemove', this.moveLens);
+      document.removeEventListener('click', this.showExpandedView);
+    });
+  }
+
+  getLensDimensions(width, height) {
+    this.setState({
+      lensOffsetX: width,
+      lensOffsetY: height
+    });
+  }
+
+  getImageDimensions(containerWidth, containerHeight, imageWidth, imageHeight) {
+    this.setState({
+      containerOffsetX: containerWidth,
+      containerOffsetY: containerHeight,
+      imageWidth: imageWidth,
+      imageHeight: imageHeight
+    });
+  }
+
+  getColumnDimensions(width, height) {
+    this.setState({
+      columnOffsetX: width,
+      columnOffsetY: height
+    });
+  }
+
+  moveLens(e) {
+    // Cursor and lens coordinates
+    let cursorX = e.pageX;
+    let cursorY = e.pageY;
+    let lensX = cursorX - this.state.lensOffsetX / 2;
+    let lensY = cursorY - this.state.lensOffsetY / 2;
+    let scaleX = this.state.windowWidth / this.state.lensOffsetX;
+    let scaleY = this.state.windowHeight / this.state.lensOffsetY;
+    let imageHorizontalPadding = (this.state.containerOffsetX - this.state.imageWidth) / 2;
+    let imageOffsetX = this.state.columnOffsetX + imageHorizontalPadding;
+
+    // Prevent lens from moving off image
+    if (this.state.imageHeight > this.state.imageWidth) {
+      if (lensX > this.state.containerOffsetX + this.state.containerOffsetX * .01 - this.state.lensOffsetX * 1.25) {
+        lensX = this.state.containerOffsetX + this.state.containerOffsetX * .01 - this.state.lensOffsetX * 1.25;
+      }
+      if (lensX <= this.state.containerOffsetX * .01 + imageHorizontalPadding) {
+        lensX = this.state.containerOffsetX * .01 + imageHorizontalPadding;
+      }
+    } else {
+      if (lensX > this.state.columnOffsetX + this.state.containerOffsetX + this.state.containerOffsetX * .01 - this.state.lensOffsetX) {
+        lensX = this.state.columnOffsetX + this.state.containerOffsetX + this.state.containerOffsetX * .01 - this.state.lensOffsetX;
+      }
+      if (lensX <= this.state.columnOffsetX + this.state.containerOffsetX * .01 + imageHorizontalPadding) {
+        lensX = this.state.columnOffsetX + this.state.containerOffsetX * .01 + imageHorizontalPadding;
+      }
+    }
+
+    if (lensY > this.state.containerOffsetY - this.state.lensOffsetY + 20) {
+      lensY = this.state.containerOffsetY - this.state.lensOffsetY + 20;
+    }
+    if (lensY <= 20) {
+      lensY = 20;
+    }
+
+    if (e.pageX > this.state.columnOffsetX && e.pageX < this.state.columnOffsetX + this.state.containerOffsetX && e.pageX > 0 && e.pageX < 0 + this.state.containerOffsetY) {
+      document.addEventListener('click', this.showExpandedView);
+    }
+
+    if (this.state.isExpandedView) {
+      document.removeEventListener('click', this.showExpandedView);
+    }
+
+    this.setState({
+      lensLeftDisplacement: lensX.toString() + 'px',
+      lensTopDisplacement: lensY.toString() + 'px',
+      scaleX: this.state.windowWidth / this.state.lensOffsetX,
+      scaleY: this.state.windowHeight / this.state.lensOffsetY,
+      zoomBackgroundPosition: '-' + (lensX * scaleX).toString() + 'px -' + (lensY * scaleY).toString() + 'px'
+    });
+  }
+
+  handleResize() {
+    this.setState({
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight
+    });
+  }
+
+  showZoom() {
+    this.setState({
+      caption: 'Click image to open expanded view',
+      isImageMagnified: true
+    });
+  }
+
+  hideZoom() {
     this.setState({
       caption: 'Roll over image to zoom in',
-      x: e.clientX,
-      y: e.clientY
-    }, () => console.log('X: ', this.state.x, ', Y: ', this.state.y));
+      isImageMagnified: false
+    });
   }
 
   showExpandedView(e) {
-    this.setState({isExpandedView: true}, () => {
+    console.log('click');
+    this.setState({isExpandedView: true, isImageMagnified: false}, () => {
+      // isImageMagnified: false;
+      document.removeEventListener('click', this.showExpandedView);
+      // window.removeEventListener('mousemove', this.moveLens);
       document.addEventListener('click', this.closeExpandedView);
     });
   }
@@ -178,10 +305,6 @@ class MediaContainer extends Component {
     }
   }
 
-  getImageDimensions(e) {
-    console.log(e);
-  }
-
   render() {
     return (
       <>
@@ -191,6 +314,7 @@ class MediaContainer extends Component {
           hoveredThumbnail={this.state.hoveredThumbnail}
           selectView={this.selectView}
           selectVideo={this.selectVideo}
+          getColumnDimensions={this.getColumnDimensions}
         />
         <div id='gall_wrapper'>
           <MainImage
@@ -198,14 +322,35 @@ class MediaContainer extends Component {
             main={this.state.main}
             isExpandedView={this.state.isExpandedView}
             onMouseEnter={this.handleMouseEnter}
-            onMouseMove={this.handleMouseMove}
             onMouseLeave={this.handleMouseLeave}
             showExpandedView={this.showExpandedView}
             getImageDimensions={this.getImageDimensions}
           />
           {!this.state.main.includes('cloudfront') && <Caption caption={this.state.caption} />}
         </div>
-        {this.state.isExpandedView && ReactDOM.createPortal(<ExpandedView
+
+        {this.state.isImageMagnified && !this.state.main.includes('cloudfront') && ReactDOM.createPortal(<MagnifierLens
+          ref={node => this.magnifier = node}
+          isImageMagnified={this.state.isImageMagnified}
+          lensLeftDisplacement={this.state.lensLeftDisplacement}
+          lensTopDisplacement={this.state.lensTopDisplacement}
+          getLensDimensions={this.getLensDimensions}
+        />, document.getElementById('gall_lensContainer'))}
+
+        {this.state.isImageMagnified && !this.state.main.includes('cloudfront') && ReactDOM.createPortal(<ZoomedImage
+          main={this.state.main}
+          windowWidth={this.state.windowWidth}
+          windowHeight={this.state.windowHeight}
+          containerOffsetX={this.state.containerOffsetX}
+          containerOffsetY={this.state.containerOffsetY}
+          scaleX={this.state.scaleX}
+          scaleY={this.state.scaleY}
+          zoomBackgroundPosition={this.state.zoomBackgroundPosition}
+          // onMouseEnter={this.state.handleMouseEnter}
+          // onMouseLeave={this.state.handleMouseLeave}
+        />, document.getElementById('gall_zoomedContainer'))}
+
+        {(this.state.isExpandedView) && ReactDOM.createPortal(<ExpandedView
           ref={node => this.expandedView = node}
           name={this.state.name}
           expandedMain={this.state.main}
