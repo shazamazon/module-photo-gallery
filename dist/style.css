@@ -6,6 +6,7 @@
   font-family: 'Amazon Ember', Arial, sans-serif;
   /* Width of component should always be 50% */
   width: 50%;
+  max-width: 50%
 }
 
 /* Prevents text from scaling above specified font size */
@@ -19,6 +20,7 @@
   width: 100%;
   font-size: calc(1vw);
   font-family: Arial, sans-serif;
+  z-index: 3;
 }
 
 /*
@@ -181,6 +183,28 @@
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+/*
+  ========================================
+  Magnify
+  ========================================
+*/
+
+#gall_zoomedImage {
+  position: absolute;
+  top: 50px;
+  left: 51%;
+  border: 1px solid rgb(148, 148, 148);
+  box-shadow: 0 6px 8px 2px rgba(0, 0, 0, .25);
+}
+
+#gall_lens {
+  width: 15vw;
+  height: 15vw;
+  position: absolute;
+  background-image: url('https://shazamazon.s3.us-east-2.amazonaws.com/icons/magnify_lens.gif');
+  cursor: pointer;
 }
 
 /*
@@ -463,7 +487,7 @@
   position: relative;
   width: 55vw;
   height: 3vw;
-  margin: 0.5vw auto;
+  margin: .5vw auto;
   text-align: left;
   font-size: calc(1.7vw);
   font-weight: 700;
