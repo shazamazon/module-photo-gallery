@@ -20,7 +20,11 @@
   width: 100%;
   font-size: calc(1vw);
   font-family: Arial, sans-serif;
+<<<<<<< HEAD
+  z-index: 5;
+=======
   z-index: 3;
+>>>>>>> 3d63da0e708007de723e92abc41dcf38d39cded6
 }
 
 /*
@@ -197,6 +201,7 @@
   left: 51%;
   border: 1px solid rgb(148, 148, 148);
   box-shadow: 0 6px 8px 2px rgba(0, 0, 0, .25);
+  z-index: 5;
 }
 
 #gall_lens {
@@ -205,6 +210,7 @@
   position: absolute;
   background-image: url('https://shazamazon.s3.us-east-2.amazonaws.com/icons/magnify_lens.gif');
   cursor: pointer;
+  z-index: 5;
 }
 
 /*

@@ -179,8 +179,8 @@ class MediaContainer extends Component {
       lensX = rightImageDisplacement - this.state.lensOffsetX;
     }
 
-    if (lensY > this.state.containerOffsetY - this.state.lensOffsetY + 20) {
-      lensY = this.state.containerOffsetY - this.state.lensOffsetY + 20;
+    if (lensY > this.state.containerOffsetY - this.state.lensOffsetY + 120) {
+      lensY = this.state.containerOffsetY - this.state.lensOffsetY + 120;
     }
     if (lensY <= 20) {
       lensY = 20;
@@ -199,9 +199,9 @@ class MediaContainer extends Component {
     let backgroundPosition;
 
     if (lensX - leftImageDisplacement / this.state.imageWidth - leftImageDisplacement <= 0.5) {
-      backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth - leftImageDisplacement ) * 100}% ${(lensY - 20 / window.innerHeight) / (this.state.imageHeight - 20 / window.innerHeight) * 100}%`;
+      backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth - leftImageDisplacement ) * 100}% ${(lensY - 120 / window.innerHeight) / (this.state.imageHeight - 120 / window.innerHeight) * 100}%`;
     } else {
-      backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth - leftImageDisplacement ) * 100}% ${(lensY - 20 / window.innerHeight) / (this.state.imageHeight - 20 / window.innerHeight) * 100}%`;
+      backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth - leftImageDisplacement ) * 100}% ${(lensY - 120 / window.innerHeight) / (this.state.imageHeight - 120 / window.innerHeight) * 100}%`;
     }
 
     this.setState({
