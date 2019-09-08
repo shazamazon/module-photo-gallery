@@ -186,7 +186,7 @@ class MediaContainer extends Component {
       lensY = 20;
     }
 
-    if (e.pageX > leftImageDisplacement && e.pageX < rightImageDisplacement && e.pageY > 0 && e.pageY < 0 + this.state.containerOffsetY) {
+    if (e.pageX > leftImageDisplacement && e.pageX < rightImageDisplacement && e.pageY > 120 && e.pageY < 120 + this.state.containerOffsetY) {
       document.addEventListener('click', this.showExpandedView);
     }
 
