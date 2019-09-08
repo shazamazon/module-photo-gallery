@@ -6,6 +6,7 @@
   font-family: 'Amazon Ember', Arial, sans-serif;
   /* Width of component should always be 50% */
   width: 50%;
+  max-width: 50%
 }
 
 /* Prevents text from scaling above specified font size */

@@ -13,7 +13,7 @@ class MediaContainer extends Component {
   constructor() {
     super();
     this.state = {
-      id: 38,
+      id: 100,
       name: '',
       images: [],
       main: '',
@@ -31,8 +31,8 @@ class MediaContainer extends Component {
       containerOffsetY: '0px',
       imageWidth: '0px',
       imageHeight: '0px',
-      imageOffsetX: '0px',
-      imageOffsetY: '0px',
+      originalImageWidth: '0px',
+      originalImageHeight: '0px',
       columnOffsetX: '0px',
       columnOffsetY: '0px',
       windowWidth: window.innerWidth * .47,
@@ -146,12 +146,14 @@ class MediaContainer extends Component {
     });
   }
 
-  getImageDimensions(containerWidth, containerHeight, imageWidth, imageHeight) {
+  getImageDimensions(containerWidth, containerHeight, imageWidth, imageHeight, originalWidth, originalHeight) {
     this.setState({
       containerOffsetX: containerWidth,
       containerOffsetY: containerHeight,
       imageWidth: imageWidth,
-      imageHeight: imageHeight
+      imageHeight: imageHeight,
+      originalImageWidth: originalWidth,
+      originalImageHeight: originalHeight
     });
   }
 
@@ -170,24 +172,20 @@ class MediaContainer extends Component {
     let lensY = cursorY - this.state.lensOffsetY / 2;
     let scaleX = this.state.windowWidth / this.state.lensOffsetX;
     let scaleY = this.state.windowHeight / this.state.lensOffsetY;
-    let imageHorizontalPadding = (this.state.containerOffsetX - this.state.imageWidth) / 2;
-    let imageOffsetX = this.state.columnOffsetX + imageHorizontalPadding;
+    let imagePadding = (this.state.containerOffsetX - this.state.imageWidth) / 2;
+    let containerMargin = this.state.containerOffsetX * 0.01 + this.state.imageWidth * 0.01;
+    let leftImageDisplacement = 8 + this.state.columnOffsetX + containerMargin + imagePadding;
+    let rightImageDisplacement = window.innerWidth / 2 - imagePadding;
 
-    // Prevent lens from moving off image
-    if (this.state.imageHeight > this.state.imageWidth) {
-      if (lensX > this.state.containerOffsetX + this.state.containerOffsetX * .01 - this.state.lensOffsetX * 1.25) {
-        lensX = this.state.containerOffsetX + this.state.containerOffsetX * .01 - this.state.lensOffsetX * 1.25;
-      }
-      if (lensX <= this.state.containerOffsetX * .01 + imageHorizontalPadding) {
-        lensX = this.state.containerOffsetX * .01 + imageHorizontalPadding;
-      }
-    } else {
-      if (lensX > this.state.columnOffsetX + this.state.containerOffsetX + this.state.containerOffsetX * .01 - this.state.lensOffsetX) {
-        lensX = this.state.columnOffsetX + this.state.containerOffsetX + this.state.containerOffsetX * .01 - this.state.lensOffsetX;
-      }
-      if (lensX <= this.state.columnOffsetX + this.state.containerOffsetX * .01 + imageHorizontalPadding) {
-        lensX = this.state.columnOffsetX + this.state.containerOffsetX * .01 + imageHorizontalPadding;
-      }
+    // console.log('container width', this.state.containerOffsetX, 'image width', this.state.imageWidth, 'image padding', imagePadding);
+    // console.log('column width', this.state.columnOffsetX, 'container margin', containerMargin);
+    // console.log('x', e.pageX, 'y', e.pageY);
+
+    if (lensX <= leftImageDisplacement) {
+      lensX = leftImageDisplacement;
+    }
+    if (lensX + this.state.lensOffsetX >= rightImageDisplacement) {
+      lensX = rightImageDisplacement - this.state.lensOffsetX;
     }
 
     if (lensY > this.state.containerOffsetY - this.state.lensOffsetY + 20) {
@@ -197,7 +195,7 @@ class MediaContainer extends Component {
       lensY = 20;
     }
 
-    if (e.pageX > this.state.columnOffsetX && e.pageX < this.state.columnOffsetX + this.state.containerOffsetX && e.pageX > 0 && e.pageX < 0 + this.state.containerOffsetY) {
+    if (e.pageX > leftImageDisplacement && e.pageX < rightImageDisplacement && e.pageY > 0 && e.pageY < 0 + this.state.containerOffsetY) {
       document.addEventListener('click', this.showExpandedView);
     }
 
@@ -321,6 +319,8 @@ class MediaContainer extends Component {
             name={this.state.name}
             main={this.state.main}
             isExpandedView={this.state.isExpandedView}
+            containerWidth={this.state.containerOffsetX}
+            containerHeight={this.state.containerOffsetY}
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}
             showExpandedView={this.showExpandedView}

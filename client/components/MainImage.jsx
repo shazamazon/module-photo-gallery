@@ -40,17 +40,24 @@ class MainImage extends Component {
     let imageWidth;
     let imageHeight;
 
+    // imageWidth = this.image.offsetWidth * .99;
+    // imageHeight = imageWidth / ratio;
+
     if (naturalWidth > naturalHeight) {
       imageWidth = this.image.offsetWidth * .99;
       imageHeight = imageWidth / ratio;
-    } else {
+    } else if (naturalWidth === naturalHeight) {
+      imageWidth = this.image.offsetWidth * .99;
       imageHeight = this.image.offsetHeight * .95;
+    } else {
+      imageHeight = this.image.offsetHeight;
       imageWidth = imageHeight * ratio;
     }
-    console.log('imagewidth', imageWidth)
+    console.log(this.image.offsetWidth, this.image.offsetHeight);
+    console.log('imagewidth', imageWidth, 'imageheight', imageHeight)
     console.log('naturalwidth', naturalWidth, 'naturalheight', naturalHeight)
 
-    this.props.getImageDimensions(this.image.offsetWidth, this.image.offsetHeight, imageWidth, imageHeight);
+    this.props.getImageDimensions(this.image.offsetWidth, this.image.offsetHeight, imageWidth, imageHeight, naturalWidth, naturalHeight);
   }
 
   render() {
