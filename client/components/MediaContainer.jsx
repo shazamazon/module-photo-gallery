@@ -80,7 +80,7 @@ class MediaContainer extends Component {
         });
       })
       .catch(err => {
-        console.log(err);
+        console.log('Error retrieving image photo');
       });
   }
 
@@ -123,11 +123,9 @@ class MediaContainer extends Component {
     }, () => {
       document.addEventListener('mousemove', this.moveLens);
     });
-    console.log('mouse in');
   }
 
   handleMouseLeave(e) {
-    console.log('mouse leave');
     this.setState({
       isImageMagnified: false,
       caption: 'Roll over image to zoom in'
@@ -170,6 +168,7 @@ class MediaContainer extends Component {
     let containerMargin = this.state.containerOffsetX * 0.01 + this.state.imageWidth * 0.01;
     let leftImageDisplacement = 8 + this.state.columnOffsetX + containerMargin + imagePadding;
     let rightImageDisplacement = window.innerWidth / 2 - imagePadding;
+    let topMargin = 121;
 
     // Prevents lens from moving off image
     if (lensX <= leftImageDisplacement) {
@@ -179,14 +178,14 @@ class MediaContainer extends Component {
       lensX = rightImageDisplacement - this.state.lensOffsetX;
     }
 
-    if (lensY > this.state.containerOffsetY - this.state.lensOffsetY + 120) {
-      lensY = this.state.containerOffsetY - this.state.lensOffsetY + 120;
+    if (lensY > this.state.containerOffsetY - this.state.lensOffsetY + topMargin) {
+      lensY = this.state.containerOffsetY - this.state.lensOffsetY + topMargin;
     }
-    if (lensY <= 120) {
-      lensY = 120;
+    if (lensY <= topMargin) {
+      lensY = topMargin;
     }
 
-    if (e.pageX > leftImageDisplacement && e.pageX < rightImageDisplacement && e.pageY > 120 && e.pageY < 120 + this.state.containerOffsetY) {
+    if (e.pageX > leftImageDisplacement && e.pageX < rightImageDisplacement && e.pageY > topMargin && e.pageY < topMargin + this.state.containerOffsetY) {
       document.addEventListener('click', this.showExpandedView);
     }
 
@@ -198,11 +197,13 @@ class MediaContainer extends Component {
     let heightZoomFactor = (this.state.containerOffsetX * this.state.zoomFactor) / (this.state.containerOffsetY * ratio);
     let backgroundPosition;
 
-    if (lensX - leftImageDisplacement / this.state.imageWidth - leftImageDisplacement <= 0.5) {
-      backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth - leftImageDisplacement ) * 100}% ${(lensY - 120 / window.innerHeight) / (this.state.imageHeight - 120 / window.innerHeight) * 100}%`;
-    } else {
-      backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth - leftImageDisplacement ) * 100}% ${(lensY - 120 / window.innerHeight) / (this.state.imageHeight - 120 / window.innerHeight) * 100}%`;
-    }
+    // if (lensX - leftImageDisplacement / this.state.imageWidth <= 0.5) {
+    //   backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth) * 100}% ${(lensY - topMargin / this.state.containerOffsetY) * 100}%`;
+    // } else {
+    //   backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth) * 100}% ${(lensY - topMargin / this.state.containerOffsetY) * 100}%`;
+    // }
+
+    backgroundPosition = `${((lensX - leftImageDisplacement) / this.state.imageWidth) * 100}% ${((lensY - topMargin) / this.state.containerOffsetY) * 100}%`;
 
     this.setState({
       lensLeftDisplacement: lensX.toString() + 'px',
@@ -234,7 +235,6 @@ class MediaContainer extends Component {
   }
 
   showExpandedView(e) {
-    console.log('click');
     this.setState({isExpandedView: true, isImageMagnified: false}, () => {
       document.removeEventListener('click', this.showExpandedView);
       document.addEventListener('click', this.closeExpandedView);

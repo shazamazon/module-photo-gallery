@@ -20,11 +20,7 @@
   width: 100%;
   font-size: calc(1vw);
   font-family: Arial, sans-serif;
-<<<<<<< HEAD
   z-index: 5;
-=======
-  z-index: 3;
->>>>>>> 3d63da0e708007de723e92abc41dcf38d39cded6
 }
 
 /*
@@ -197,11 +193,19 @@
 
 #gall_zoomedImage {
   position: absolute;
-  top: 50px;
+  top: 121px;
   left: 51%;
   border: 1px solid rgb(148, 148, 148);
   box-shadow: 0 6px 8px 2px rgba(0, 0, 0, .25);
   z-index: 5;
+}
+
+#gall_underlay {
+  position: absolute;
+  top: 121px;
+  left: 51%;
+  background: #fff;
+  z-index: 4;
 }
 
 #gall_lens {
