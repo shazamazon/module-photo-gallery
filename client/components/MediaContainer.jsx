@@ -204,7 +204,7 @@ class MediaContainer extends Component {
     //   backgroundPosition = `${((lensX - leftImageDisplacement) / this.state.imageWidth) * 100}% ${((lensY - topImageDisplacement) / this.state.containerOffsetY) * 100}%`;
     // }
 
-    backgroundPosition = `${((lensX - leftImageDisplacement) / (this.state.imageWidth - (this.state.lensOffsetX / 2))) * 100}% ${((lensY - topImageDisplacement) / (this.state.containerOffsetY - (this.state.lensOffsetY / 2))) * 100}%`;
+    backgroundPosition = `${((lensX - leftImageDisplacement) / (this.state.imageWidth - this.state.lensOffsetX)) * 100}% ${((lensY - topImageDisplacement) / (this.state.containerOffsetY - this.state.lensOffsetY)) * 100}%`;
 
     this.setState({
       lensLeftDisplacement: lensX.toString() + 'px',
