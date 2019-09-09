@@ -51,6 +51,8 @@ class MainImage extends Component {
       imageWidth = imageHeight * ratio;
     }
 
+    // console.log(naturalWidth, naturalHeight, 'ratio', ratio)
+    // console.log(imageWidth, imageHeight, 'ratio', ratio)
     this.props.getImageDimensions(this.image.offsetWidth, this.image.offsetHeight, imageWidth, imageHeight);
   }
 
