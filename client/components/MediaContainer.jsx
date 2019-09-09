@@ -213,12 +213,12 @@ class MediaContainer extends Component {
 
     backgroundPosition = `${((cursorX - leftImageDisplacement) / (this.state.imageWidth)) * 100}% ${((cursorY - topImageDisplacement) / (this.state.containerOffsetY)) * 100}%`;
 
-    let zoom = this.state.windowWidth / this.state.lensOffsetX;
-    let hzoom = (this.state.containerOffsetX * zoom / (this.state.containerOffsetY * ratio));
-    hzoom = this.state.windowHeight / this.state.lensOffsetY;
-    zoom = ((this.state.containerOffsetX * this.state.zoomFactor) / this.state.imageWidth);
-    console.log(zoom);
-    backgroundPosition = `-${(lensX - leftImageDisplacement) * zoom}px -${(lensY - topImageDisplacement) * zoom}px`;
+    // let zoom = this.state.windowWidth / this.state.lensOffsetX;
+    // let hzoom = (this.state.containerOffsetX * zoom / (this.state.containerOffsetY * ratio));
+    // hzoom = this.state.windowHeight / this.state.lensOffsetY;
+    // zoom = ((this.state.containerOffsetX * this.state.zoomFactor) / this.state.imageWidth);
+    // console.log(zoom);
+    // backgroundPosition = `-${(lensX - leftImageDisplacement) * zoom}px -${(lensY - topImageDisplacement) * zoom}px`;
 
     this.setState({
       lensLeftDisplacement: lensX.toString() + 'px',
