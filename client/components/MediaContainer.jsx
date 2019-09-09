@@ -99,6 +99,9 @@ class MediaContainer extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
+    if (!this.state.isImageMagnified) {
+      document.removeEventListener('click', this.showExpandedView);
+    }
   }
 
   selectView(e) {
