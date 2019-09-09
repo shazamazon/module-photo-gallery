@@ -120,7 +120,6 @@ class MediaContainer extends Component {
   }
 
   handleMouseEnter(e) {
-    console.log(e.target);
     if (this.mainImage.image.contains(e.target)) {
       this.setState({
         isImageMagnified: !this.state.isImageMagnified,
