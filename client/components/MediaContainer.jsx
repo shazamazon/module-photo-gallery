@@ -167,8 +167,8 @@ class MediaContainer extends Component {
     let horizontalImagePadding = (this.state.containerOffsetX - this.state.imageWidth) / 2;
     let verticalImagePadding = ((this.state.containerOffsetX - (this.state.containerOffsetX * 0.95)) / 2);
     let containerMargin = this.state.containerOffsetX * 0.01 + this.state.imageWidth * 0.01;
-    let leftImageDisplacement = 15 + this.state.columnOffsetX + containerMargin + imagePadding;
-    let rightImageDisplacement = window.innerWidth / 2 - imagePadding;
+    let leftImageDisplacement = 15 + this.state.columnOffsetX + containerMargin + horizontalImagePadding;
+    let rightImageDisplacement = window.innerWidth / 2 - horizontalImagePadding;
     let topImageDisplacement = 121 + verticalImagePadding;
 
     // Prevents lens from moving off image
