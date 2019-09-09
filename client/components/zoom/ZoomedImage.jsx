@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ZoomedImage = (props) => {
-  console.log(props.main)
   return (
     <div
       id='gall_underlay'
