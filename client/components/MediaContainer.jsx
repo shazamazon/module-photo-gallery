@@ -197,7 +197,7 @@ class MediaContainer extends Component {
 
     let ratio = this.state.containerOffsetX / this.state.containerOffsetY;
     let heightZoomFactor = (this.state.containerOffsetX * this.state.zoomFactor) / (this.state.containerOffsetY * ratio);
-    let backgroundPosition;
+    // let backgroundPosition;
 
     // if ((cursorX - leftImageDisplacement) / this.state.imageWidth <= 0.5) {
     //   backgroundPosition = `${((lensX - leftImageDisplacement) / this.state.imageWidth) * 100}% ${((lensY - topImageDisplacement) / this.state.containerOffsetY) * 100}%`;
@@ -209,7 +209,28 @@ class MediaContainer extends Component {
 
     // backgroundPosition = `${((lensX - leftImageDisplacement) / (this.state.imageWidth - (this.state.lensOffsetX / 1.1))) * 100}% ${((lensY - topImageDisplacement) / (this.state.containerOffsetY - this.state.lensOffsetY)) * 100}%`;
 
-    backgroundPosition = `${((cursorX - leftImageDisplacement) / (this.state.imageWidth)) * 100}% ${((cursorY - topImageDisplacement) / (this.state.containerOffsetY)) * 100}%`;
+    // backgroundPosition = `${((cursorX - leftImageDisplacement) / (this.state.imageWidth)) * 100}% ${((cursorY - topImageDisplacement) / (this.state.containerOffsetY)) * 100}%`;
+
+    let backgroundX;
+    let backgroundY;
+
+    if (lensX + this.state.lensOffsetX <= this.state.imageWidth / 2) {
+      backgroundX = ((lensX - leftImageDisplacement) / this.state.imageWidth) * 100;
+    } else if ((this.state.imageWidth / 2) + this.state.lensOffsetX <= lensX + this.state.lensOffsetX) {
+      backgroundX = ((cursorX - leftImageDisplacement) / this.state.imageWidth) * 100;
+    } else {
+      backgroundX = ((lensX + this.state.lensOffsetX) / this.state.imageWidth) * 100;
+    }
+
+    if (lensY + this.state.lensOffsetY <= this.state.this.state.containerOffsetY / 2) {
+      backgroundY = ((lensY - topImageDisplacement) / this.state.this.state.containerOffsetY) * 100;
+    } else if ((this.state.this.state.containerOffsetY / 2) + this.state.lensOffsetY <= lensY + this.state.lensOffsetY) {
+      backgroundY = ((cursorY - topImageDisplacement) / this.state.this.state.containerOffsetY) * 100;
+    } else {
+      backgroundY = ((lensY + this.state.lensOffsetY) / this.state.this.state.containerOffsetY) * 100;
+    }
+
+    let backgroundPosition = `${backgroundX}% ${backgroundY}%`;
 
     this.setState({
       lensLeftDisplacement: lensX.toString() + 'px',
