@@ -347,6 +347,7 @@ class MediaContainer extends Component {
           windowHeight={this.state.windowHeight}
           backgroundSize={this.state.zoomBackgroundSize}
           backgroundPosition={this.state.zoomBackgroundPosition}
+          onMouseEnter={this.handleMouseEnter}
         />, document.getElementById('gall_zoomedContainer'))}
 
         {(this.state.isExpandedView) && ReactDOM.createPortal(<ExpandedView
