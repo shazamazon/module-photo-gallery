@@ -58,7 +58,7 @@ class MainImage extends Component {
 
   render() {
     return (
-      <>
+      <div onClick={this.props.showExpandedView}>
         <div
           id={this.props.main.includes('cloudfront') ? 'gall_video' : 'gall_main'}
           onMouseEnter={e => this.props.onMouseLeave(e)}
@@ -74,13 +74,12 @@ class MainImage extends Component {
               ref={node => this.image = node}
               src={this.props.main}
               alt={this.props.name}
-              onClick={this.props.showExpandedView}
               onLoad={(e) => this.getDimensions(e)}
               onMouseEnter={e => this.props.onMouseEnter(e)}
             />
           )}
         </div>
-      </>
+      </div>
     );
   }
 }
