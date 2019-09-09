@@ -120,10 +120,13 @@ class MediaContainer extends Component {
   }
 
   handleMouseEnter(e) {
-    this.setState({
-      isImageMagnified: !this.state.isImageMagnified,
-      caption: this.state.caption === 'Click image to open expanded view' ? 'Roll over image to zoom in' : 'Click image to open expanded view'
-    }, () => document.addEventListener('mousemove', this.moveLens));
+    console.log(e.target);
+    if (this.mainImage.image.contains(e.target)) {
+      this.setState({
+        isImageMagnified: !this.state.isImageMagnified,
+        caption: this.state.caption === 'Click image to open expanded view' ? 'Roll over image to zoom in' : 'Click image to open expanded view'
+      }, () => document.addEventListener('mousemove', this.moveLens));
+    }
   }
 
   handleMouseLeave(e) {
@@ -187,9 +190,9 @@ class MediaContainer extends Component {
       lensY = topImageDisplacement;
     }
 
-    if (e.pageX > leftImageDisplacement && e.pageX < rightImageDisplacement && e.pageY > topImageDisplacement && e.pageY < topImageDisplacement + this.state.containerOffsetY) {
-      document.addEventListener('click', this.showExpandedView);
-    }
+    // if (e.pageX > leftImageDisplacement && e.pageX < rightImageDisplacement && e.pageY > topImageDisplacement && e.pageY < topImageDisplacement + this.state.containerOffsetY) {
+    //   document.addEventListener('click', this.showExpandedView);
+    // }
 
     if (this.state.isExpandedView) {
       document.removeEventListener('click', this.showExpandedView);
@@ -320,6 +323,7 @@ class MediaContainer extends Component {
         />
         <div id='gall_wrapper'>
           <MainImage
+            ref={node => this.mainImage = node}
             name={this.state.name}
             main={this.state.main}
             isExpandedView={this.state.isExpandedView}
