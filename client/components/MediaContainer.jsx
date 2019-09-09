@@ -95,13 +95,13 @@ class MediaContainer extends Component {
       }
     });
     window.addEventListener('resize', this.handleResize);
+    if (!this.state.isImageMagnified) {
+      document.removeEventListener('click', this.showExpandedView);
+    }
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
-    if (!this.state.isImageMagnified) {
-      document.removeEventListener('click', this.showExpandedView);
-    }
   }
 
   selectView(e) {
