@@ -120,9 +120,7 @@ class MediaContainer extends Component {
     this.setState({
       isImageMagnified: !this.state.isImageMagnified,
       caption: this.state.caption === 'Click image to open expanded view' ? 'Roll over image to zoom in' : 'Click image to open expanded view'
-    }, () => {
-      setTimeout(document.addEventListener('mousemove', this.moveLens), 5000);
-    });
+    }, () => document.addEventListener('mousemove', this.moveLens));
   }
 
   handleMouseLeave(e) {
@@ -203,8 +201,9 @@ class MediaContainer extends Component {
     // } else {
     //   backgroundPosition = `${((lensX - leftImageDisplacement) / this.state.imageWidth) * 100}% ${((lensY - topImageDisplacement) / this.state.containerOffsetY) * 100}%`;
     // }
-
-    backgroundPosition = `${((lensX - leftImageDisplacement) / (this.state.imageWidth)) * 100}% ${((lensY - topImageDisplacement) / (this.state.containerOffsetY)) * 100}%`;
+    // console.log('container', this.state.containerOffsetX, this.state.containerOffsetY);
+    // console.log(e.pageX, e.pageY)
+    backgroundPosition = `${((lensX - leftImageDisplacement) / (this.state.imageWidth - (this.state.lensOffsetX / 1.1))) * 100}% ${((lensY - topImageDisplacement) / (this.state.containerOffsetY - this.state.lensOffsetY)) * 100}%`;
 
     this.setState({
       lensLeftDisplacement: lensX.toString() + 'px',
