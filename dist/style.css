@@ -200,6 +200,14 @@
   z-index: 5;
 }
 
+#gall_underlay {
+  position: absolute;
+  top: 121px;
+  left: 51%;
+  background: #fff;
+  z-index: 4;
+}
+
 #gall_lens {
   width: 15vw;
   height: 15vw;
