@@ -164,11 +164,12 @@ class MediaContainer extends Component {
     let cursorY = e.pageY;
     let lensX = cursorX - this.state.lensOffsetX / 2;
     let lensY = cursorY - this.state.lensOffsetY / 2;
-    let imagePadding = (this.state.containerOffsetX - this.state.imageWidth) / 2;
+    let horizontalImagePadding = (this.state.containerOffsetX - this.state.imageWidth) / 2;
+    let verticalImagePadding = ((this.state.containerOffsetX - (this.state.containerOffsetX * 0.95)) / 2);
     let containerMargin = this.state.containerOffsetX * 0.01 + this.state.imageWidth * 0.01;
-    let leftImageDisplacement = 8 + this.state.columnOffsetX + containerMargin + imagePadding;
+    let leftImageDisplacement = 15 + this.state.columnOffsetX + containerMargin + imagePadding;
     let rightImageDisplacement = window.innerWidth / 2 - imagePadding;
-    let topMargin = 121;
+    let topImageDisplacement = 121 + verticalImagePadding;
 
     // Prevents lens from moving off image
     if (lensX <= leftImageDisplacement) {
@@ -178,14 +179,14 @@ class MediaContainer extends Component {
       lensX = rightImageDisplacement - this.state.lensOffsetX;
     }
 
-    if (lensY > this.state.containerOffsetY - this.state.lensOffsetY + topMargin) {
-      lensY = this.state.containerOffsetY - this.state.lensOffsetY + topMargin;
+    if (lensY > this.state.containerOffsetY - this.state.lensOffsetY + topImageDisplacement) {
+      lensY = this.state.containerOffsetY - this.state.lensOffsetY + topImageDisplacement;
     }
-    if (lensY <= topMargin) {
-      lensY = topMargin;
+    if (lensY <= topImageDisplacement) {
+      lensY = topImageDisplacement;
     }
 
-    if (e.pageX > leftImageDisplacement && e.pageX < rightImageDisplacement && e.pageY > topMargin && e.pageY < topMargin + this.state.containerOffsetY) {
+    if (e.pageX > leftImageDisplacement && e.pageX < rightImageDisplacement && e.pageY > topImageDisplacement && e.pageY < topImageDisplacement + this.state.containerOffsetY) {
       document.addEventListener('click', this.showExpandedView);
     }
 
@@ -198,12 +199,12 @@ class MediaContainer extends Component {
     let backgroundPosition;
 
     // if (lensX - leftImageDisplacement / this.state.imageWidth <= 0.5) {
-    //   backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth) * 100}% ${(lensY - topMargin / this.state.containerOffsetY) * 100}%`;
+    //   backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth) * 100}% ${(lensY - topImageDisplacement / this.state.containerOffsetY) * 100}%`;
     // } else {
-    //   backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth) * 100}% ${(lensY - topMargin / this.state.containerOffsetY) * 100}%`;
+    //   backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth) * 100}% ${(lensY - topImageDisplacement / this.state.containerOffsetY) * 100}%`;
     // }
 
-    backgroundPosition = `${((lensX - leftImageDisplacement) / this.state.imageWidth) * 100}% ${((lensY - topMargin) / this.state.containerOffsetY) * 100}%`;
+    backgroundPosition = `${((lensX - leftImageDisplacement) / this.state.imageWidth) * 100}% ${((lensY - topImageDisplacement) / this.state.containerOffsetY) * 100}%`;
 
     this.setState({
       lensLeftDisplacement: lensX.toString() + 'px',
