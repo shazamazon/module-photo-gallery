@@ -208,8 +208,8 @@
 }
 
 #gall_lens {
-  width: 15vw;
-  height: 15vw;
+  width: 25vw;
+  height: 25vw;
   position: absolute;
   background-image: url('https://shazamazon.s3.us-east-2.amazonaws.com/icons/magnify_lens.gif');
   cursor: pointer;
