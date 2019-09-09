@@ -198,13 +198,13 @@ class MediaContainer extends Component {
     let heightZoomFactor = (this.state.containerOffsetX * this.state.zoomFactor) / (this.state.containerOffsetY * ratio);
     let backgroundPosition;
 
-    // if (lensX - leftImageDisplacement / this.state.imageWidth <= 0.5) {
-    //   backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth) * 100}% ${(lensY - topImageDisplacement / this.state.containerOffsetY) * 100}%`;
+    // if ((cursorX - leftImageDisplacement) / this.state.imageWidth <= 0.5) {
+    //   backgroundPosition = `${((lensX - leftImageDisplacement) / this.state.imageWidth) * 100}% ${((lensY - topImageDisplacement) / this.state.containerOffsetY) * 100}%`;
     // } else {
-    //   backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth) * 100}% ${(lensY - topImageDisplacement / this.state.containerOffsetY) * 100}%`;
+    //   backgroundPosition = `${((lensX - leftImageDisplacement) / this.state.imageWidth) * 100}% ${((lensY - topImageDisplacement) / this.state.containerOffsetY) * 100}%`;
     // }
 
-    backgroundPosition = `${((cursorX - leftImageDisplacement) / this.state.imageWidth) * 100}% ${((cursorY - topImageDisplacement) / this.state.containerOffsetY) * 100}%`;
+    backgroundPosition = `${((cursorX - leftImageDisplacement) / this.state.imageWidth - this.state.lensOffsetX) * 100}% ${((cursorY - topImageDisplacement) / this.state.containerOffsetY - this.state.lensOffsetY) * 100}%`;
 
     this.setState({
       lensLeftDisplacement: lensX.toString() + 'px',
