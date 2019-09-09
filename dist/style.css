@@ -177,7 +177,7 @@
 #gall_video:before {
   content: '';
   position: absolute;
-  background: no-repeat 50% 24%/16% url('https://shazamazon.s3.us-east-2.amazonaws.com/icons/play_icon.jpg');
+  background: no-repeat 50% 30%/16% url('https://shazamazon.s3.us-east-2.amazonaws.com/icons/play_icon.jpg');
   border-radius: 5px;
   top: 0;
   right: 0;
