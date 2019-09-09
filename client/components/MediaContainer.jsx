@@ -80,7 +80,7 @@ class MediaContainer extends Component {
         });
       })
       .catch(err => {
-        console.log(err);
+        console.log('Error retrieving image photo');
       });
   }
 
@@ -123,11 +123,9 @@ class MediaContainer extends Component {
     }, () => {
       document.addEventListener('mousemove', this.moveLens);
     });
-    console.log('mouse in');
   }
 
   handleMouseLeave(e) {
-    console.log('mouse leave');
     this.setState({
       isImageMagnified: false,
       caption: 'Roll over image to zoom in'
@@ -205,7 +203,7 @@ class MediaContainer extends Component {
     //   backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth) * 100}% ${(lensY - topMargin / this.state.containerOffsetY) * 100}%`;
     // }
 
-    backgroundPosition = `${(lensX - leftImageDisplacement) / (this.state.imageWidth) * 100}% ${(lensY - topMargin / this.state.containerOffsetY) * 100}%`;
+    backgroundPosition = `${((lensX - leftImageDisplacement) / this.state.imageWidth) * 100}% ${((lensY - topMargin) / this.state.containerOffsetY) * 100}%`;
 
     this.setState({
       lensLeftDisplacement: lensX.toString() + 'px',
@@ -237,7 +235,6 @@ class MediaContainer extends Component {
   }
 
   showExpandedView(e) {
-    console.log('click');
     this.setState({isExpandedView: true, isImageMagnified: false}, () => {
       document.removeEventListener('click', this.showExpandedView);
       document.addEventListener('click', this.closeExpandedView);
