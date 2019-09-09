@@ -206,7 +206,10 @@ class MediaContainer extends Component {
     // }
     // console.log('container', this.state.containerOffsetX, this.state.containerOffsetY);
     // console.log(e.pageX, e.pageY)
-    backgroundPosition = `${((lensX - leftImageDisplacement) / (this.state.imageWidth - (this.state.lensOffsetX / 1.1))) * 100}% ${((lensY - topImageDisplacement) / (this.state.containerOffsetY - this.state.lensOffsetY)) * 100}%`;
+
+    // backgroundPosition = `${((lensX - leftImageDisplacement) / (this.state.imageWidth - (this.state.lensOffsetX / 1.1))) * 100}% ${((lensY - topImageDisplacement) / (this.state.containerOffsetY - this.state.lensOffsetY)) * 100}%`;
+
+    backgroundPosition = `${((cursorX - leftImageDisplacement) / (this.state.imageWidth)) * 100}% ${((cursorY - topImageDisplacement) / (this.state.containerOffsetY)) * 100}%`;
 
     this.setState({
       lensLeftDisplacement: lensX.toString() + 'px',
