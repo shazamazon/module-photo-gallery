@@ -1,39 +1,63 @@
-# Project Name
+# Shazamazon
 
-> Project description
+> Photo gallery component of a magic-themed clone of Amazon's product page
 
-## Related Projects
+View proxy [here](https://github.com/shazamazon/proxy-photo-gallery).
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+## Contributors
 
-## Table of Contents
+  - [Navigation and Search](https://github.com/shazamazon/module-nav-search-bar) - [Sean McCarthy](https://github.com/SeanMcCarthy3223)
+  - [Item Description](https://github.com/shazamazon/module-item-description) - [Whitney Lee](https://github.com/wiggitywhitney)
+  - [Cart](https://github.com/shazamazon/module-cart) - [John Connolly](https://github.com/jkcryptolock)
+  - [Carousel](https://github.com/shazamazon/module-the-best-carousel) - [Jeff Salinas](https://github.com/JeffSalinas)
+  - [Questions & Answers](https://github.com/shazamazon/modules-qa) - [Gibran Iqbal](https://github.com/Jibbscript)
+  - [Reviews](https://github.com/shazamazon/module-reviews) - [Arohan Dutt](https://github.com/ArohanD)
 
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
+## Getting Started
 
-## Usage
+> Follow these instructions to get a development environment running.
 
-> Some usage instructions
+### Requirements
 
-## Requirements
+- Node 10.16.0 or a later version
+- nodemon
+- MongoDB
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
+### Prerequisites
 
-- Node 6.13.0
-- etc
+Currently, the application is connected to MongoDB Atlas. Create a database using MongoDB on your local machine and invoke the `seedDatabase` function defined in `database/index.js`.
 
-## Development
+### Installation
 
-### Installing Dependencies
+From within the root directory, install dependencies:
 
-From within the root directory:
-
-```sh
-npm install -g webpack
+```
 npm install
 ```
 
+Start MongoDB:
+
+```
+mongod
+```
+
+Bundle modules with webpack:
+
+```
+npm build
+```
+
+Start server:
+
+```
+npm start
+```
+
+Navigate to http://localhost:8369.
+
+## Built With
+
+- [React](https://reactjs.org/)
+- [Node.js](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
