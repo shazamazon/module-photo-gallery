@@ -25,7 +25,7 @@ View proxy [here](https://github.com/shazamazon/proxy-photo-gallery).
 
 ### Prerequisites
 
-Currently, the application is connected to MongoDB Atlas. Create a database using MongoDB on your local machine and invoke the `seedDatabase` function defined in `database/index.js`.
+Currently, the application is connected to MongoDB Atlas. Create a database using MongoDB on your local machine and invoke the `seedDatabase` function defined in `database/index.js`. Then, update `URI` in `database/index.js` to reflect address of local database.
 
 ### Installation
 
